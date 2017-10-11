@@ -1,0 +1,15 @@
+package com.souvenotes.souvenotes
+
+import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+
+/**
+ * Created by NicholasCook on 10/10/17.
+ */
+class LoginActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_login)
+    }
+}
