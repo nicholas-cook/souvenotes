@@ -4,22 +4,18 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/login_email"
+    <Button
+        android:id="@+id/option_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:hint="@string/hint_email"
-        android:inputType="textEmailAddress"
-        android:maxLength="100"/>
+        android:text="@string/option_login"/>
 
-    <EditText
-        android:id="@+id/login_password"
+    <Button
+        android:id="@+id/option_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:hint="@string/hint_password"
-        android:inputType="textPassword"
-        android:maxLength="50"/>
+        android:text="@string/option_register"/>
 
 </LinearLayout>
