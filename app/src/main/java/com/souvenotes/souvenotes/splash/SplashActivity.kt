@@ -3,8 +3,8 @@ package com.souvenotes.souvenotes.splash
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.souvenotes.souvenotes.LoginActivity
 import com.souvenotes.souvenotes.R
+import com.souvenotes.souvenotes.loginoptions.LoginOptionsActivity
 
 /**
  * Created by NicholasCook on 10/10/17.
@@ -24,7 +24,7 @@ class SplashActivity : AppCompatActivity(), ISplashContract.View {
     }
 
     override fun loadLoginOptionsActivity() {
-        startActivity(Intent(this, LoginActivity::class.java))
+        startActivity(Intent(this, LoginOptionsActivity::class.java))
     }
 
     override fun loadNotesListActivity() {

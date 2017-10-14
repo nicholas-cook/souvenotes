@@ -14,11 +14,15 @@ interface IRegistrationContract {
 
         fun loadNotesListActivity()
 
-        fun showRegistrationError()
+        fun showRegistrationError(@StringRes message: Int)
 
-        fun setEmailError()
+        fun setEmailError(isError: Boolean, @StringRes message: Int)
 
-        fun setPasswordError(@StringRes message: Int)
+        fun setPasswordError(isError: Boolean, @StringRes message: Int)
+
+        fun setPasswordConfirmationError(isError: Boolean, @StringRes message: Int)
+
+        fun registerUser(email: String, password: String)
     }
 
     interface Presenter : IBasePresenter {
@@ -27,6 +31,8 @@ interface IRegistrationContract {
         fun onEmailEntered(email: String?)
 
         fun onPasswordEntered(password: String?)
+
+        fun onPasswordConfirmationEntered(passwordConfirmation: String?)
 
         fun onRegisterButtonClicked()
     }

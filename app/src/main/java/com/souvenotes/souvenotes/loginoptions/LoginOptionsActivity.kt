@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.souvenotes.souvenotes.LoginActivity
 import com.souvenotes.souvenotes.R
+import com.souvenotes.souvenotes.registration.RegistrationActivity
 import kotlinx.android.synthetic.main.activity_login_options.*
 
 /**
@@ -32,6 +33,6 @@ class LoginOptionsActivity : AppCompatActivity(), ILoginOptionsContract.View {
     }
 
     override fun loadRegistrationActivity() {
-        //TODO: Load registration activity
+        startActivity(Intent(this, RegistrationActivity::class.java))
     }
 }
