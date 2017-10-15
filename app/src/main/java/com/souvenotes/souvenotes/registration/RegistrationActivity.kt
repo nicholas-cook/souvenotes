@@ -9,6 +9,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.souvenotes.souvenotes.R
 import com.souvenotes.souvenotes.models.RegistrationModel
 import com.souvenotes.souvenotes.utils.SimpleTextWatcher
+import com.souvenotes.souvenotes.utils.hideKeyboard
 import kotlinx.android.synthetic.main.activity_registration.*
 
 /**
@@ -18,11 +19,13 @@ class RegistrationActivity : AppCompatActivity(), IRegistrationContract.View {
 
     private val presenter = RegistrationPresenter(this)
     private var model = RegistrationModel()
-    private val firebaseAuth = FirebaseAuth.getInstance()
+    private var firebaseAuth: FirebaseAuth? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
+
+        firebaseAuth = FirebaseAuth.getInstance()
 
         model = savedInstanceState?.getParcelable(EXTRA_REGISTRATION_MODEL) ?: RegistrationModel()
         presenter.setRegistrationModel(model)
@@ -82,7 +85,8 @@ class RegistrationActivity : AppCompatActivity(), IRegistrationContract.View {
     }
 
     override fun registerUser(email: String, password: String) {
-        firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this) { result ->
+        hideKeyboard(registration_parent)
+        firebaseAuth?.createUserWithEmailAndPassword(email, password)?.addOnCompleteListener(this) { result ->
             if (result.isSuccessful) {
                 loadNotesListActivity()
             } else {

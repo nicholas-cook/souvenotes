@@ -4,6 +4,8 @@
     <!-- Login -->
     <string name="hint_email">Email Address</string>
     <string name="hint_password">Password</string>
+    <string name="log_in">Log In</string>
+    <string name="login_error">Unable to log in</string>
 
     <!-- Login Options -->
     <string name="title_login_options">Log In Or Sign Up</string>

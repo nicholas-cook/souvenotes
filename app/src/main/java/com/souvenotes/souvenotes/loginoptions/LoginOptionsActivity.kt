@@ -3,7 +3,7 @@ package com.souvenotes.souvenotes.loginoptions
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.souvenotes.souvenotes.LoginActivity
+import com.souvenotes.souvenotes.login.LoginActivity
 import com.souvenotes.souvenotes.R
 import com.souvenotes.souvenotes.registration.RegistrationActivity
 import kotlinx.android.synthetic.main.activity_login_options.*
