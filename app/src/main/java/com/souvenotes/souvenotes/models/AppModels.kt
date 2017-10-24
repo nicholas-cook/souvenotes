@@ -6,7 +6,8 @@ import android.os.Parcelable
 /**
  * Created on 10/11/17.
  */
-data class RegistrationModel(var email: String = "", var password: String = "", var passwordConfirmation: String = "") : Parcelable {
+data class RegistrationModel(var email: String = "", var password: String = "",
+                             var passwordConfirmation: String = "") : Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readString(),
             parcel.readString(),
@@ -44,5 +45,26 @@ data class LoginModel(var email: String = "", var password: String = "") : Parce
 
         override fun newArray(size: Int): Array<LoginModel?> = arrayOfNulls(size)
     }
+}
 
+data class NoteModel(var title: String = "", var content: String = "",
+                     var timestamp: Long = System.currentTimeMillis()) : Parcelable {
+    constructor(parcel: Parcel) : this(
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readLong())
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(title)
+        parcel.writeString(content)
+        parcel.writeLong(timestamp)
+    }
+
+    override fun describeContents(): Int = 0
+
+    companion object CREATOR : Parcelable.Creator<NoteModel> {
+        override fun createFromParcel(parcel: Parcel): NoteModel = NoteModel(parcel)
+
+        override fun newArray(size: Int): Array<NoteModel?> = arrayOfNulls(size)
+    }
 }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.souvenotes.souvenotes.R
+import com.souvenotes.souvenotes.list.NotesListActivity
 import com.souvenotes.souvenotes.loginoptions.LoginOptionsActivity
 
 /**
@@ -23,7 +24,7 @@ class SplashActivity : AppCompatActivity() {
             finish()
             startActivity(Intent(this, LoginOptionsActivity::class.java))
         } else {
-            //TODO: Load notes list
+            startActivity(Intent(this, NotesListActivity::class.java))
         }
     }
 }

@@ -25,4 +25,8 @@
     <string name="button_sign_up">Sign Up</string>
     <string name="confirm_password">Confirm password</string>
     <string name="registration_error">Unable to complete sign up</string>
+
+    <!-- Notes List -->
+    <string name="title_notes">Notes</string>
+    <string name="empty_list">Add a note using the button below</string>
 </resources>

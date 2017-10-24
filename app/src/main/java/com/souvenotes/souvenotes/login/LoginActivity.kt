@@ -1,11 +1,13 @@
 package com.souvenotes.souvenotes.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import com.google.firebase.auth.FirebaseAuth
 import com.souvenotes.souvenotes.R
+import com.souvenotes.souvenotes.list.NotesListActivity
 import com.souvenotes.souvenotes.models.LoginModel
 import com.souvenotes.souvenotes.utils.SimpleTextWatcher
 import com.souvenotes.souvenotes.utils.hideKeyboard
@@ -71,7 +73,7 @@ class LoginActivity : AppCompatActivity(), ILoginContract.View {
     }
 
     private fun loadNotesListActivity() {
-        //TODO: Got to list screen
+        startActivity(Intent(this, NotesListActivity::class.java))
     }
 
     override fun logInUser(email: String, password: String) {

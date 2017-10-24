@@ -1,12 +1,13 @@
 package com.souvenotes.souvenotes.registration
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
-import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.souvenotes.souvenotes.R
+import com.souvenotes.souvenotes.list.NotesListActivity
 import com.souvenotes.souvenotes.models.RegistrationModel
 import com.souvenotes.souvenotes.utils.SimpleTextWatcher
 import com.souvenotes.souvenotes.utils.hideKeyboard
@@ -65,7 +66,7 @@ class RegistrationActivity : AppCompatActivity(), IRegistrationContract.View {
     }
 
     override fun loadNotesListActivity() {
-        //TODO: Load notes list
+        startActivity(Intent(this, NotesListActivity::class.java))
     }
 
     override fun showRegistrationError(message: Int) {
@@ -86,12 +87,13 @@ class RegistrationActivity : AppCompatActivity(), IRegistrationContract.View {
 
     override fun registerUser(email: String, password: String) {
         hideKeyboard(registration_parent)
-        firebaseAuth?.createUserWithEmailAndPassword(email, password)?.addOnCompleteListener(this) { result ->
+        firebaseAuth?.createUserWithEmailAndPassword(email, password)?.addOnCompleteListener(
+                this) { result ->
             if (result.isSuccessful) {
                 loadNotesListActivity()
             } else {
-                Log.e("Registration Error", "", result.exception)
-                Snackbar.make(registration_parent, R.string.registration_error, Snackbar.LENGTH_LONG).show()
+                Snackbar.make(registration_parent, R.string.registration_error,
+                        Snackbar.LENGTH_LONG).show()
             }
         }
     }
