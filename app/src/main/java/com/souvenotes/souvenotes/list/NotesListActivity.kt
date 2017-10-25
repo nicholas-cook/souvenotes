@@ -1,11 +1,13 @@
 package com.souvenotes.souvenotes.list
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.souvenotes.souvenotes.R
 import com.souvenotes.souvenotes.models.NoteModel
+import com.souvenotes.souvenotes.note.AddNoteActivity
 import kotlinx.android.synthetic.main.activity_notes_list.*
 
 /**
@@ -20,6 +22,10 @@ class NotesListActivity : AppCompatActivity(), IListContract.View {
         setContentView(R.layout.activity_notes_list)
         listPresenter.start()
         setTitle(R.string.title_notes)
+
+        add_note.setOnClickListener {
+            startActivity(Intent(this, AddNoteActivity::class.java))
+        }
     }
 
     override fun onNotesAvailable(notes: List<NoteModel>) {

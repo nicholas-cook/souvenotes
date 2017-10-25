@@ -2,6 +2,7 @@ package com.souvenotes.souvenotes.models
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.google.firebase.database.Exclude
 
 /**
  * Created on 10/11/17.
@@ -66,5 +67,41 @@ data class NoteModel(var title: String = "", var content: String = "",
         override fun createFromParcel(parcel: Parcel): NoteModel = NoteModel(parcel)
 
         override fun newArray(size: Int): Array<NoteModel?> = arrayOfNulls(size)
+    }
+
+    @Exclude
+    fun toMap(): Map<String, Any> {
+        return HashMap<String, Any>().apply {
+            put("title", title)
+            put("content", content)
+            put("timestamp", timestamp)
+        }
+    }
+}
+
+data class NoteListModel(val title: String, val timestamp: Long) : Parcelable {
+    constructor(parcel: Parcel) : this(
+            parcel.readString(),
+            parcel.readLong())
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(title)
+        parcel.writeLong(timestamp)
+    }
+
+    override fun describeContents(): Int = 0
+
+    companion object CREATOR : Parcelable.Creator<NoteListModel> {
+        override fun createFromParcel(parcel: Parcel): NoteListModel = NoteListModel(parcel)
+
+        override fun newArray(size: Int): Array<NoteListModel?> = arrayOfNulls(size)
+    }
+
+    @Exclude
+    fun toMap(): Map<String, Any> {
+        return HashMap<String, Any>().apply {
+            put("title", title)
+            put("timestamp", timestamp)
+        }
     }
 }
