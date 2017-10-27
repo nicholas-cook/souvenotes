@@ -26,7 +26,7 @@ class NotesListAdapter(private val activity: NotesListActivity,
         holder.itemView.note_title.text = if (model.title.isEmpty()) holder.itemView.context.getString(
                 R.string.untitled) else model.title
         holder.itemView.note_date.text = "${holder.itemView.context.getString(
-                R.string.last_updated)} ${DateTimeUtils.getDisplayFormat(model.timestamp)}"
+                R.string.last_updated)} ${DateTimeUtils.getDisplayFormat(-1 * model.timestamp)}"
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotesViewHolder {

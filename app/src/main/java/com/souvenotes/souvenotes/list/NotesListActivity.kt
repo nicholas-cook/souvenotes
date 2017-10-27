@@ -71,13 +71,17 @@ class NotesListActivity : AppCompatActivity(), IListContract.View {
     fun setViewVisibility(itemsPresent: Boolean) {
         empty_view.visibility = if (itemsPresent) View.GONE else View.VISIBLE
         notes_recycler_view.visibility = if (itemsPresent) View.VISIBLE else View.GONE
+        if (itemsPresent) {
+            add_note.show()
+        }
     }
 
     private fun getListOptions(): FirebaseRecyclerOptions<NoteListModel> {
         val databaseRef = FirebaseDatabase.getInstance().reference
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         return FirebaseRecyclerOptions.Builder<NoteListModel>()
-                .setQuery(databaseRef.child("notes-list").child(userId), NoteListModel::class.java)
+                .setQuery(databaseRef.child("notes-list").child(userId).orderByChild(
+                        "timestamp").limitToLast(100), NoteListModel::class.java)
                 .build()
     }
 }

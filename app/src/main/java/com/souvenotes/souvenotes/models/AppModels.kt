@@ -79,7 +79,8 @@ data class NoteModel(var title: String = "", var content: String = "",
     }
 }
 
-data class NoteListModel(val title: String = "", val timestamp: Long = System.currentTimeMillis()) {
+data class NoteListModel(val title: String = "",
+                         val timestamp: Long = -1 * System.currentTimeMillis()) {
 
     @Exclude
     fun toMap(): Map<String, Any> {

@@ -18,7 +18,7 @@ class AddNotePresenter(private val addNoteView: IAddNotesContract.View?) :
         if (!title.isEmpty() && !content.isEmpty()) {
             val timestamp = System.currentTimeMillis()
             val notesValues = NoteModel(title, content, timestamp).toMap()
-            val noteListValues = NoteListModel(title, timestamp).toMap()
+            val noteListValues = NoteListModel(title, -1 * timestamp).toMap()
             val childUpdates = HashMap<String, Any>()
             val userId = FirebaseAuth.getInstance().currentUser?.uid
 
