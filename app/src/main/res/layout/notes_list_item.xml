@@ -2,16 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:orientation="vertical">
+              android:orientation="vertical"
+              android:padding="@dimen/list_padding">
 
     <TextView
         android:id="@+id/note_title"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:padding="@dimen/mp_xxsmall"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/list_title"/>
 
     <TextView
         android:id="@+id/note_date"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:padding="@dimen/mp_xxsmall"
+        android:textSize="@dimen/list_date"/>
 
 </LinearLayout>

@@ -31,4 +31,6 @@
     <string name="empty_list">Add a note using the button below</string>
     <string name="hint_title">Enter title</string>
     <string name="hint_content">Enter note</string>
+    <string name="last_updated">Last Updated:</string>
+    <string name="untitled">Untitled</string>
 </resources>

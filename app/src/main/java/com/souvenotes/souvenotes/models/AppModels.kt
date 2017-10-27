@@ -79,23 +79,7 @@ data class NoteModel(var title: String = "", var content: String = "",
     }
 }
 
-data class NoteListModel(val title: String, val timestamp: Long) : Parcelable {
-    constructor(parcel: Parcel) : this(
-            parcel.readString(),
-            parcel.readLong())
-
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(title)
-        parcel.writeLong(timestamp)
-    }
-
-    override fun describeContents(): Int = 0
-
-    companion object CREATOR : Parcelable.Creator<NoteListModel> {
-        override fun createFromParcel(parcel: Parcel): NoteListModel = NoteListModel(parcel)
-
-        override fun newArray(size: Int): Array<NoteListModel?> = arrayOfNulls(size)
-    }
+data class NoteListModel(val title: String = "", val timestamp: Long = System.currentTimeMillis()) {
 
     @Exclude
     fun toMap(): Map<String, Any> {
