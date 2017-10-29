@@ -31,6 +31,8 @@
     <string name="empty_list">Add a note using the button below</string>
     <string name="hint_title">Enter title</string>
     <string name="hint_content">Enter note</string>
-    <string name="last_updated">Last Updated:</string>
+    <string name="last_updated">Last Updated: %s</string>
     <string name="untitled">Untitled</string>
+    <string name="max_notes">You have reached the maximum number of notes.</string>
+    <string name="load_notes_error">An error occurred loading your notes. Please try again later.</string>
 </resources>

@@ -12,7 +12,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.souvenotes.souvenotes.R
 import com.souvenotes.souvenotes.models.NoteListModel
-import com.souvenotes.souvenotes.models.NoteModel
 import com.souvenotes.souvenotes.note.AddNoteActivity
 import kotlinx.android.synthetic.main.activity_notes_list.*
 
@@ -27,12 +26,7 @@ class NotesListActivity : AppCompatActivity(), IListContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notes_list)
-        listPresenter.start()
         setTitle(R.string.title_notes)
-
-        add_note.setOnClickListener {
-            startActivity(Intent(this, AddNoteActivity::class.java))
-        }
 
         notesAdapter = NotesListAdapter(this, getListOptions())
         notes_recycler_view.addItemDecoration(
@@ -59,20 +53,34 @@ class NotesListActivity : AppCompatActivity(), IListContract.View {
         notesAdapter?.stopListening()
     }
 
-    override fun onNotesAvailable(notes: List<NoteModel>) {
-        empty_view.visibility = if (notes.isEmpty()) View.VISIBLE else View.GONE
+    fun showNotesError() {
+        Snackbar.make(list_parent, R.string.load_notes_error, Snackbar.LENGTH_LONG).show()
     }
 
-    override fun onLoadNotesError(message: Int) {
-        empty_view.visibility = View.VISIBLE
-        Snackbar.make(list_parent, message, Snackbar.LENGTH_LONG).show()
-    }
-
-    fun setViewVisibility(itemsPresent: Boolean) {
-        empty_view.visibility = if (itemsPresent) View.GONE else View.VISIBLE
-        notes_recycler_view.visibility = if (itemsPresent) View.VISIBLE else View.GONE
-        if (itemsPresent) {
+    fun onChildChanged(itemCount: Int) {
+        if (!add_note.isShown) {
             add_note.show()
+        }
+        listPresenter.onChildChanged(itemCount)
+    }
+
+    override fun setListVisibility(visible: Boolean) {
+        notes_recycler_view.visibility = if (visible) View.VISIBLE else View.GONE
+    }
+
+    override fun setEmptyViewVisibility(visible: Boolean) {
+        empty_view.visibility = if (visible) View.VISIBLE else View.GONE
+    }
+
+    override fun setAddButtonClickListener(atMax: Boolean) {
+        if (atMax) {
+            add_note.setOnClickListener {
+                Snackbar.make(list_parent, R.string.max_notes, Snackbar.LENGTH_LONG).show()
+            }
+        } else {
+            add_note.setOnClickListener {
+                startActivity(Intent(this, AddNoteActivity::class.java))
+            }
         }
     }
 
@@ -81,7 +89,7 @@ class NotesListActivity : AppCompatActivity(), IListContract.View {
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         return FirebaseRecyclerOptions.Builder<NoteListModel>()
                 .setQuery(databaseRef.child("notes-list").child(userId).orderByChild(
-                        "timestamp").limitToLast(100), NoteListModel::class.java)
+                        "timestamp").limitToLast(110), NoteListModel::class.java)
                 .build()
     }
 }

@@ -1,7 +1,6 @@
 package com.souvenotes.souvenotes.list
 
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,8 +24,8 @@ class NotesListAdapter(private val activity: NotesListActivity,
     override fun onBindViewHolder(holder: NotesViewHolder, position: Int, model: NoteListModel) {
         holder.itemView.note_title.text = if (model.title.isEmpty()) holder.itemView.context.getString(
                 R.string.untitled) else model.title
-        holder.itemView.note_date.text = "${holder.itemView.context.getString(
-                R.string.last_updated)} ${DateTimeUtils.getDisplayFormat(-1 * model.timestamp)}"
+        holder.itemView.note_date.text = holder.itemView.context.getString(R.string.last_updated,
+                DateTimeUtils.getDisplayFormat(-1 * model.timestamp))
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotesViewHolder {
@@ -36,13 +35,13 @@ class NotesListAdapter(private val activity: NotesListActivity,
 
     override fun onError(error: DatabaseError?) {
         super.onError(error)
-        Log.e("Adapter", error?.message)
+        activity.showNotesError()
     }
 
     override fun onChildChanged(type: ChangeEventType?, snapshot: DataSnapshot?, newIndex: Int,
                                 oldIndex: Int) {
         super.onChildChanged(type, snapshot, newIndex, oldIndex)
-        activity.setViewVisibility(itemCount > 0)
+        activity.onChildChanged(itemCount)
     }
 
     class NotesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
