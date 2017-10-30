@@ -11,6 +11,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.souvenotes.souvenotes.R
 import com.souvenotes.souvenotes.models.NoteListModel
+import com.souvenotes.souvenotes.note.AddNoteActivity
 import com.souvenotes.souvenotes.utils.DateTimeUtils
 import kotlinx.android.synthetic.main.notes_list_item.view.*
 
@@ -26,6 +27,10 @@ class NotesListAdapter(private val activity: NotesListActivity,
                 R.string.untitled) else model.title
         holder.itemView.note_date.text = holder.itemView.context.getString(R.string.last_updated,
                 DateTimeUtils.getDisplayFormat(-1 * model.timestamp))
+        holder.itemView.setOnClickListener {
+            val notesKey = getRef(holder.adapterPosition).key
+            AddNoteActivity.editNote(holder.itemView.context, notesKey)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotesViewHolder {

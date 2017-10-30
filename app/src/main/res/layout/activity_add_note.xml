@@ -13,7 +13,7 @@
         android:hint="@string/hint_title"
         android:inputType="textCapWords|textAutoCorrect"
         android:lines="1"
-        android:maxLength="50"
+        android:maxLength="100"
         android:nextFocusDown="@+id/note_content"/>
 
     <EditText
@@ -22,6 +22,7 @@
         android:layout_height="match_parent"
         android:gravity="top"
         android:hint="@string/hint_content"
-        android:inputType="textCapSentences|textAutoCorrect"/>
+        android:inputType="textCapSentences|textAutoCorrect"
+        android:maxLength="25000"/>
 
 </LinearLayout>

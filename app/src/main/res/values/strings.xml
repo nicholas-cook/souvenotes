@@ -29,10 +29,18 @@
     <!-- Notes List -->
     <string name="title_notes">Notes</string>
     <string name="empty_list">Add a note using the button below</string>
-    <string name="hint_title">Enter title</string>
-    <string name="hint_content">Enter note</string>
     <string name="last_updated">Last Updated: %s</string>
-    <string name="untitled">Untitled</string>
     <string name="max_notes">You have reached the maximum number of notes.</string>
     <string name="load_notes_error">An error occurred loading your notes. Please try again later.</string>
+
+    <!-- Notes -->
+    <string name="hint_title">Enter title</string>
+    <string name="hint_content">Enter note</string>
+    <string name="untitled">Untitled</string>
+    <string name="note_load_error">Unable to load note. Please try again later.</string>
+    <string name="add_note_error">Unable to add note</string>
+    <string name="update_note_error">Unable to update note</string>
+    <string name="title_edit_note">Edit Note</string>
+    <string name="title_add_note">Add Note</string>
+
 </resources>

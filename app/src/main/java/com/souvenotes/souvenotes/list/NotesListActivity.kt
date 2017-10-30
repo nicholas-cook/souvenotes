@@ -26,7 +26,6 @@ class NotesListActivity : AppCompatActivity(), IListContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notes_list)
-        setTitle(R.string.title_notes)
 
         notesAdapter = NotesListAdapter(this, getListOptions())
         notes_recycler_view.addItemDecoration(
@@ -41,6 +40,9 @@ class NotesListActivity : AppCompatActivity(), IListContract.View {
                 }
             }
         })
+        add_note.setOnClickListener {
+            startActivity(Intent(this, AddNoteActivity::class.java))
+        }
     }
 
     override fun onStart() {

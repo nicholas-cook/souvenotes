@@ -48,17 +48,14 @@ data class LoginModel(var email: String = "", var password: String = "") : Parce
     }
 }
 
-data class NoteModel(var title: String = "", var content: String = "",
-                     var timestamp: Long = System.currentTimeMillis()) : Parcelable {
+data class NoteModel(var title: String = "", var content: String = "") : Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readString(),
-            parcel.readString(),
-            parcel.readLong())
+            parcel.readString())
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(title)
         parcel.writeString(content)
-        parcel.writeLong(timestamp)
     }
 
     override fun describeContents(): Int = 0
@@ -74,7 +71,6 @@ data class NoteModel(var title: String = "", var content: String = "",
         return HashMap<String, Any>().apply {
             put("title", title)
             put("content", content)
-            put("timestamp", timestamp)
         }
     }
 }
