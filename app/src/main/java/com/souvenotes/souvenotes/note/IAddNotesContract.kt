@@ -15,6 +15,8 @@ interface IAddNotesContract {
         fun onNoteLoaded(note: NoteModel)
 
         fun onLoadNoteError()
+
+        fun logout()
     }
 
     interface Presenter : IBasePresenter {

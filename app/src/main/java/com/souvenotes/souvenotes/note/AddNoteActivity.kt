@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.widget.Toast
 import com.souvenotes.souvenotes.R
+import com.souvenotes.souvenotes.login.LoginActivity
 import com.souvenotes.souvenotes.models.NoteModel
 import com.souvenotes.souvenotes.utils.SimpleTextWatcher
 import kotlinx.android.synthetic.main.activity_add_note.*
@@ -63,6 +64,10 @@ class AddNoteActivity : AppCompatActivity(), IAddNotesContract.View {
     override fun onLoadNoteError() {
         Toast.makeText(this, R.string.note_load_error, Toast.LENGTH_LONG).show()
         finish()
+    }
+
+    override fun logout() {
+        LoginActivity.logout(this)
     }
 
     override fun onSupportNavigateUp(): Boolean {

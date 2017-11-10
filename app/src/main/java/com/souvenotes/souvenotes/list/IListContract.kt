@@ -15,6 +15,8 @@ interface IListContract {
         fun setAddButtonClickListener(atMax: Boolean)
 
         fun showNoteDeletionError()
+
+        fun logout()
     }
 
     interface Presenter {

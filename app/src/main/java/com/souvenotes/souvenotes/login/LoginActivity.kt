@@ -1,5 +1,6 @@
 package com.souvenotes.souvenotes.login
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -73,12 +74,16 @@ class LoginActivity : AppCompatActivity(), ILoginContract.View {
     }
 
     private fun loadNotesListActivity() {
-        startActivity(Intent(this, NotesListActivity::class.java))
+        val toNotesList = Intent(this, NotesListActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK.or(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        }
+        startActivity(toNotesList)
     }
 
     override fun logInUser(email: String, password: String) {
         hideKeyboard(login_parent)
-        firebaseAuth?.signInWithEmailAndPassword(email, password)?.addOnCompleteListener(this) { result ->
+        firebaseAuth?.signInWithEmailAndPassword(email, password)?.addOnCompleteListener(
+                this) { result ->
             if (result.isSuccessful) {
                 loadNotesListActivity()
             } else {
@@ -93,5 +98,12 @@ class LoginActivity : AppCompatActivity(), ILoginContract.View {
 
     companion object {
         private const val EXTRA_LOGIN_MODEL = "com.souvenotes.souvenotes.login.EXTRA_LOGIN_MODEL"
+
+        fun logout(context: Context) {
+            val logout = Intent(context, LoginActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK.or(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            }
+            context.startActivity(logout)
+        }
     }
 }

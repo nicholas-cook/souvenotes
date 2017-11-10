@@ -16,16 +16,20 @@ class NotesListPresenter(private val listView: IListContract.View?) : IListContr
     }
 
     override fun deleteNote(listRef: DatabaseReference, noteKey: String) {
-        listRef.removeValue { error, _ ->
-            error?.let {
-                listView?.showNoteDeletionError()
-            }
-        }
         val userId = FirebaseAuth.getInstance().currentUser?.uid
-        FirebaseDatabase.getInstance().reference.child("notes").child(userId).child(
-                noteKey).removeValue { error, _ ->
-            error?.let {
-                listView?.showNoteDeletionError()
+        if (userId == null) {
+            listView?.logout()
+        } else {
+            FirebaseDatabase.getInstance().reference.child("notes").child(userId).child(
+                    noteKey).removeValue { error, _ ->
+                error?.let {
+                    listView?.showNoteDeletionError()
+                }
+            }
+            listRef.removeValue { error, _ ->
+                error?.let {
+                    listView?.showNoteDeletionError()
+                }
             }
         }
     }

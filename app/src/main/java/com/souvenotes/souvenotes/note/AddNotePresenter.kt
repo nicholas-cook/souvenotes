@@ -21,6 +21,9 @@ class AddNotePresenter(private val addNoteView: IAddNotesContract.View?,
     private var existingNote = NoteModel()
 
     override fun start() {
+        if (userId == null) {
+            addNoteView?.logout()
+        }
         notesKey?.let {
             existingNotesRef = FirebaseDatabase.getInstance().reference.child("notes").child(
                     userId).child(it)

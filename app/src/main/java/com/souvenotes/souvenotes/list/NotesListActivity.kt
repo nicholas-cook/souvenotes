@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.souvenotes.souvenotes.R
+import com.souvenotes.souvenotes.login.LoginActivity
 import com.souvenotes.souvenotes.models.NoteListModel
 import com.souvenotes.souvenotes.note.AddNoteActivity
 import kotlinx.android.synthetic.main.activity_notes_list.*
@@ -88,6 +89,10 @@ class NotesListActivity : AppCompatActivity(), IListContract.View {
         listPresenter?.onChildChanged(itemCount)
     }
 
+    override fun logout() {
+        LoginActivity.logout(this)
+    }
+
     override fun setListVisibility(visible: Boolean) {
         notes_recycler_view.visibility = if (visible) View.VISIBLE else View.GONE
     }
@@ -111,6 +116,9 @@ class NotesListActivity : AppCompatActivity(), IListContract.View {
     private fun getListOptions(): FirebaseRecyclerOptions<NoteListModel> {
         val databaseRef = FirebaseDatabase.getInstance().reference
         val userId = FirebaseAuth.getInstance().currentUser?.uid
+        if (userId == null) {
+            logout()
+        }
         return FirebaseRecyclerOptions.Builder<NoteListModel>()
                 .setQuery(databaseRef.child("notes-list").child(userId).orderByChild(
                         "timestamp").limitToLast(110), NoteListModel::class.java)
