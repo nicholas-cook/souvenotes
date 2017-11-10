@@ -31,6 +31,11 @@ class NotesListAdapter(private val activity: NotesListActivity,
             val notesKey = getRef(holder.adapterPosition).key
             AddNoteActivity.editNote(holder.itemView.context, notesKey)
         }
+        holder.itemView.setOnLongClickListener {
+            val databaseRef = getRef(holder.adapterPosition)
+            activity.showNoteDeletionConfirmation(databaseRef, databaseRef.key)
+            true
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotesViewHolder {

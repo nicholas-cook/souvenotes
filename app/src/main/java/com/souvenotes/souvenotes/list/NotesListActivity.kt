@@ -3,12 +3,14 @@ package com.souvenotes.souvenotes.list
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.souvenotes.souvenotes.R
 import com.souvenotes.souvenotes.models.NoteListModel
@@ -20,12 +22,14 @@ import kotlinx.android.synthetic.main.activity_notes_list.*
  */
 class NotesListActivity : AppCompatActivity(), IListContract.View {
 
-    private val listPresenter = NotesListPresenter(this)
+    private var listPresenter: IListContract.Presenter? = null
     private var notesAdapter: NotesListAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notes_list)
+
+        listPresenter = NotesListPresenter(this)
 
         notesAdapter = NotesListAdapter(this, getListOptions())
         notes_recycler_view.addItemDecoration(
@@ -59,11 +63,29 @@ class NotesListActivity : AppCompatActivity(), IListContract.View {
         Snackbar.make(list_parent, R.string.load_notes_error, Snackbar.LENGTH_LONG).show()
     }
 
+    fun showNoteDeletionConfirmation(listRef: DatabaseReference, noteKey: String) {
+        val builder = AlertDialog.Builder(this).apply {
+            setMessage(R.string.message_delete)
+            setPositiveButton(R.string.option_delete
+            ) { dialog, _ ->
+                dialog.dismiss()
+                listPresenter?.deleteNote(listRef, noteKey)
+            }
+            setNegativeButton(android.R.string.cancel
+            ) { dialog, _ -> dialog.dismiss() }
+        }
+        builder.show()
+    }
+
+    override fun showNoteDeletionError() {
+        Snackbar.make(list_parent, R.string.delete_error, Snackbar.LENGTH_LONG).show()
+    }
+
     fun onChildChanged(itemCount: Int) {
         if (!add_note.isShown) {
             add_note.show()
         }
-        listPresenter.onChildChanged(itemCount)
+        listPresenter?.onChildChanged(itemCount)
     }
 
     override fun setListVisibility(visible: Boolean) {
