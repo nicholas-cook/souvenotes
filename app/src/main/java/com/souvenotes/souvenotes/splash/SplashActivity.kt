@@ -21,10 +21,11 @@ class SplashActivity : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
         if (firebaseAuth?.currentUser == null) {
-            finish()
             startActivity(Intent(this, LoginOptionsActivity::class.java))
+            finish()
         } else {
             startActivity(Intent(this, NotesListActivity::class.java))
+            finish()
         }
     }
 }
