@@ -1,7 +1,6 @@
 package com.souvenotes.souvenotes.list
 
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 /**
@@ -15,21 +14,17 @@ class NotesListPresenter(private val listView: IListContract.View?) : IListContr
         listView?.setAddButtonClickListener(itemCount >= 100)
     }
 
-    override fun deleteNote(listRef: DatabaseReference, noteKey: String) {
+    override fun deleteNote(noteKey: String) {
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         if (userId == null) {
             listView?.logout()
         } else {
-            FirebaseDatabase.getInstance().reference.child("notes").child(userId).child(
-                    noteKey).removeValue { error, _ ->
-                error?.let {
-                    listView?.showNoteDeletionError()
-                }
-            }
-            listRef.removeValue { error, _ ->
-                error?.let {
-                    listView?.showNoteDeletionError()
-                }
+            val childUpdates = HashMap<String, Any?>()
+            childUpdates.put("/notes/$userId/$noteKey", null)
+            childUpdates.put("/notes-list/$userId/$noteKey", null)
+            FirebaseDatabase.getInstance().reference.updateChildren(
+                    childUpdates).addOnFailureListener {
+                listView?.showNoteDeletionError()
             }
         }
     }

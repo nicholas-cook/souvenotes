@@ -74,6 +74,26 @@ class AddNotePresenter(private val addNoteView: IAddNotesContract.View?,
         }
     }
 
+    override fun deleteNote() {
+        notesKey?.let {
+            val childUpdates = HashMap<String, Any?>()
+            childUpdates.put("/notes/$userId/$it", null)
+            childUpdates.put("/notes-list/$userId/$it", null)
+            //Prevent triggering error for successful delete
+            existingNotesRef?.removeEventListener(valueEventListener)
+            FirebaseDatabase.getInstance().reference.updateChildren(
+                    childUpdates).addOnFailureListener {
+                existingNotesRef?.addValueEventListener(valueEventListener)
+                addNoteView?.onNoteDeleteError()
+            }.addOnCompleteListener {
+                addNoteView?.onNoteDeleted()
+            }
+        }
+        if (notesKey == null) {
+            addNoteView?.onNoteDeleted()
+        }
+    }
+
     private fun isNoteEmpty(title: String, content: String): Boolean {
         return title.isEmpty() && content.isEmpty()
     }

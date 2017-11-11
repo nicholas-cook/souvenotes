@@ -1,7 +1,5 @@
 package com.souvenotes.souvenotes.list
 
-import com.google.firebase.database.DatabaseReference
-
 /**
  * Created by NicholasCook on 10/15/17.
  */
@@ -22,6 +20,6 @@ interface IListContract {
     interface Presenter {
         fun onChildChanged(itemCount: Int)
 
-        fun deleteNote(listRef: DatabaseReference, noteKey: String)
+        fun deleteNote(noteKey: String)
     }
 }

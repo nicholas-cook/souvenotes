@@ -4,10 +4,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.firebase.ui.common.ChangeEventType
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
-import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.souvenotes.souvenotes.R
 import com.souvenotes.souvenotes.models.NoteListModel
@@ -32,8 +30,7 @@ class NotesListAdapter(private val activity: NotesListActivity,
             AddNoteActivity.editNote(holder.itemView.context, notesKey)
         }
         holder.itemView.setOnLongClickListener {
-            val databaseRef = getRef(holder.adapterPosition)
-            activity.showNoteDeletionConfirmation(databaseRef, databaseRef.key)
+            activity.showNoteDeletionConfirmation(getRef(holder.adapterPosition).key)
             true
         }
     }
@@ -48,9 +45,7 @@ class NotesListAdapter(private val activity: NotesListActivity,
         activity.showNotesError()
     }
 
-    override fun onChildChanged(type: ChangeEventType?, snapshot: DataSnapshot?, newIndex: Int,
-                                oldIndex: Int) {
-        super.onChildChanged(type, snapshot, newIndex, oldIndex)
+    override fun onDataChanged() {
         activity.onChildChanged(itemCount)
     }
 

@@ -16,10 +16,16 @@ interface IAddNotesContract {
 
         fun onLoadNoteError()
 
+        fun onNoteDeleteError()
+
+        fun onNoteDeleted()
+
         fun logout()
     }
 
     interface Presenter : IBasePresenter {
         fun saveNote(title: String, content: String)
+
+        fun deleteNote()
     }
 }

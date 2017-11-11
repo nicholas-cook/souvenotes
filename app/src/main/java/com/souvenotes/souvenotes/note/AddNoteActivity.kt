@@ -3,8 +3,12 @@ package com.souvenotes.souvenotes.note
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.design.widget.Snackbar
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import com.souvenotes.souvenotes.R
 import com.souvenotes.souvenotes.login.LoginActivity
@@ -21,6 +25,7 @@ class AddNoteActivity : AppCompatActivity(), IAddNotesContract.View {
     private val noteModel = NoteModel()
 
     private var noteKey: String? = null
+    private var isDeleting = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +50,35 @@ class AddNoteActivity : AppCompatActivity(), IAddNotesContract.View {
                 noteModel.content = s.toString()
             }
         })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_add_note, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.delete_note -> {
+                showNoteDeletionConfirmation()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun showNoteDeletionConfirmation() {
+        val builder = AlertDialog.Builder(this).apply {
+            setMessage(R.string.message_delete)
+            setPositiveButton(R.string.option_delete
+            ) { dialog, _ ->
+                dialog.dismiss()
+                addNotePresenter.deleteNote()
+            }
+            setNegativeButton(android.R.string.cancel
+            ) { dialog, _ -> dialog.dismiss() }
+        }
+        builder.show()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -75,8 +109,20 @@ class AddNoteActivity : AppCompatActivity(), IAddNotesContract.View {
         return true
     }
 
+    override fun onNoteDeleteError() {
+        isDeleting = false
+        Snackbar.make(add_note_parent, R.string.delete_error, Snackbar.LENGTH_LONG).show()
+    }
+
+    override fun onNoteDeleted() {
+        isDeleting = true
+        finish()
+    }
+
     override fun onStop() {
-        addNotePresenter.saveNote(note_title.text.toString(), note_content.text.toString())
+        if (!isDeleting) {
+            addNotePresenter.saveNote(note_title.text.toString(), note_content.text.toString())
+        }
         addNotePresenter.stop()
         super.onStop()
     }
