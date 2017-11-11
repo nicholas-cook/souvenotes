@@ -13,9 +13,13 @@ interface ILoginContract {
 
         fun setPasswordError(isError: Boolean, @StringRes message: Int)
 
-        fun logInUser(email: String, password: String)
-
         fun setLoginButtonEnabled(enabled: Boolean)
+
+        fun hideKeyboard()
+
+        fun onLoginSuccess()
+
+        fun onLoginFailed(@StringRes message: Int)
     }
 
     interface Presenter {

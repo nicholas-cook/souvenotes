@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
-import com.google.firebase.auth.FirebaseAuth
 import com.souvenotes.souvenotes.R
 import com.souvenotes.souvenotes.list.NotesListActivity
 import com.souvenotes.souvenotes.models.LoginModel
@@ -20,9 +19,8 @@ import kotlinx.android.synthetic.main.activity_login.*
  */
 class LoginActivity : AppCompatActivity(), ILoginContract.View {
 
-    private val loginPresenter = LoginPresenter(this)
+    private var loginPresenter: ILoginContract.Presenter? = null
     private var loginModel = LoginModel()
-    private var firebaseAuth: FirebaseAuth? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,26 +28,26 @@ class LoginActivity : AppCompatActivity(), ILoginContract.View {
 
         supportActionBar?.setTitle(R.string.title_login)
 
-        firebaseAuth = FirebaseAuth.getInstance()
+        loginPresenter = LoginPresenter(this)
 
         loginModel = savedInstanceState?.getParcelable(EXTRA_LOGIN_MODEL) ?: LoginModel()
 
         login_email.addTextChangedListener(object : SimpleTextWatcher() {
             override fun afterTextChanged(s: Editable) {
-                loginPresenter.onEmailEntered(s.toString())
+                loginPresenter?.onEmailEntered(s.toString())
             }
         })
         login_email.setText(loginModel.email)
 
         login_password.addTextChangedListener(object : SimpleTextWatcher() {
             override fun afterTextChanged(s: Editable) {
-                loginPresenter.onPasswordEntered(s.toString())
+                loginPresenter?.onPasswordEntered(s.toString())
             }
         })
         login_password.setText(loginModel.password)
 
         button_sign_up.setOnClickListener {
-            loginPresenter.onLoginButtonClicked()
+            loginPresenter?.onLoginButtonClicked()
         }
 
         create_account.setOnClickListener {
@@ -87,18 +85,16 @@ class LoginActivity : AppCompatActivity(), ILoginContract.View {
         startActivity(toNotesList)
     }
 
-    //ERROR_USER_NOT_FOUND
-    //ERROR_WRONG_PASSWORD
-    override fun logInUser(email: String, password: String) {
+    override fun onLoginSuccess() {
+        loadNotesListActivity()
+    }
+
+    override fun onLoginFailed(message: Int) {
+        Snackbar.make(login_parent, message, Snackbar.LENGTH_LONG).show()
+    }
+
+    override fun hideKeyboard() {
         hideKeyboard(login_parent)
-        firebaseAuth?.signInWithEmailAndPassword(email, password)?.addOnCompleteListener(
-                this) { result ->
-            if (result.isSuccessful) {
-                loadNotesListActivity()
-            } else {
-                Snackbar.make(login_parent, R.string.login_error, Snackbar.LENGTH_LONG).show()
-            }
-        }
     }
 
     override fun setLoginButtonEnabled(enabled: Boolean) {

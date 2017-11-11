@@ -1,6 +1,9 @@
 package com.souvenotes.souvenotes.login
 
 import android.util.Patterns
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.souvenotes.souvenotes.R
 import com.souvenotes.souvenotes.models.LoginModel
 
@@ -22,7 +25,8 @@ class LoginPresenter(private val loginView: ILoginContract.View?) : ILoginContra
     }
 
     private fun validateModel() {
-        loginView?.setLoginButtonEnabled(loginModel.email.isNotBlank() && loginModel.password.isNotEmpty())
+        loginView?.setLoginButtonEnabled(
+                loginModel.email.isNotBlank() && loginModel.password.isNotEmpty())
     }
 
     override fun onLoginButtonClicked() {
@@ -40,7 +44,21 @@ class LoginPresenter(private val loginView: ILoginContract.View?) : ILoginContra
             loginView?.setPasswordError(false, 0)
         }
         if (valid) {
-            loginView?.logInUser(loginModel.email, loginModel.password)
+            loginView?.hideKeyboard()
+            FirebaseAuth.getInstance().signInWithEmailAndPassword(loginModel.email,
+                    loginModel.password).addOnCompleteListener { result ->
+                if (result.isSuccessful) {
+                    loginView?.onLoginSuccess()
+                } else {
+                    when {
+                        result.exception is FirebaseAuthInvalidUserException -> loginView?.onLoginFailed(
+                                R.string.error_account)
+                        result.exception is FirebaseAuthInvalidCredentialsException -> loginView?.onLoginFailed(
+                                R.string.error_credentials)
+                        else -> loginView?.onLoginFailed(R.string.login_error)
+                    }
+                }
+            }
         }
     }
 
