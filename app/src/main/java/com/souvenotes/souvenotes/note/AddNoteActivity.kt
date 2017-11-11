@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.activity_add_note.*
  */
 class AddNoteActivity : AppCompatActivity(), IAddNotesContract.View {
 
-    private lateinit var addNotePresenter: AddNotePresenter
+    private var addNotePresenter: IAddNotesContract.Presenter? = null
     private val noteModel = NoteModel()
 
     private var noteKey: String? = null
@@ -38,7 +38,7 @@ class AddNoteActivity : AppCompatActivity(), IAddNotesContract.View {
         setTitle(if (noteKey != null) R.string.title_edit_note else R.string.title_add_note)
 
         addNotePresenter = AddNotePresenter(this, noteKey)
-        addNotePresenter.start()
+        addNotePresenter?.start()
 
         note_title.addTextChangedListener(object : SimpleTextWatcher() {
             override fun afterTextChanged(s: Editable) {
@@ -73,7 +73,7 @@ class AddNoteActivity : AppCompatActivity(), IAddNotesContract.View {
             setPositiveButton(R.string.option_delete
             ) { dialog, _ ->
                 dialog.dismiss()
-                addNotePresenter.deleteNote()
+                addNotePresenter?.deleteNote()
             }
             setNegativeButton(android.R.string.cancel
             ) { dialog, _ -> dialog.dismiss() }
@@ -121,9 +121,9 @@ class AddNoteActivity : AppCompatActivity(), IAddNotesContract.View {
 
     override fun onStop() {
         if (!isDeleting) {
-            addNotePresenter.saveNote(note_title.text.toString(), note_content.text.toString())
+            addNotePresenter?.saveNote(note_title.text.toString(), note_content.text.toString())
         }
-        addNotePresenter.stop()
+        addNotePresenter?.stop()
         super.onStop()
     }
 
