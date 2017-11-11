@@ -6,6 +6,7 @@
     <string name="hint_password">Password</string>
     <string name="log_in">Log In</string>
     <string name="login_error">Unable to log in</string>
+    <string name="title_login">Log In To Souvenotes</string>
 
     <!-- Login Options -->
     <string name="title_login_options">Log In Or Sign Up</string>
@@ -13,7 +14,7 @@
     <string name="option_register">Sign Up</string>
 
     <!-- Registration -->
-    <string name="title_registration">Sign Up</string>
+    <string name="title_registration">Create Account</string>
     <string name="email_format">Not a valid email address</string>
     <string name="poor_password">Password does not match criteria</string>
     <string name="password_empty">Empty password</string>
@@ -23,6 +24,7 @@
     <string name="password_match_error">Passwords do not match</string>
     <string name="password_criteria">Your password must contain at least 8 characters, one letter, and one number.</string>
     <string name="button_sign_up">Sign Up</string>
+    <string name="create_account">Create Account</string>
     <string name="confirm_password">Confirm password</string>
     <string name="registration_error">Unable to complete sign up</string>
 

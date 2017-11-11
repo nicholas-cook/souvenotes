@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.souvenotes.souvenotes.R
 import com.souvenotes.souvenotes.list.NotesListActivity
-import com.souvenotes.souvenotes.loginoptions.LoginOptionsActivity
+import com.souvenotes.souvenotes.login.LoginActivity
 
 /**
  * Created by NicholasCook on 10/10/17.
@@ -21,7 +21,7 @@ class SplashActivity : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
         if (firebaseAuth?.currentUser == null) {
-            startActivity(Intent(this, LoginOptionsActivity::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
         } else {
             startActivity(Intent(this, NotesListActivity::class.java))
         }

@@ -10,6 +10,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.souvenotes.souvenotes.R
 import com.souvenotes.souvenotes.list.NotesListActivity
 import com.souvenotes.souvenotes.models.LoginModel
+import com.souvenotes.souvenotes.registration.RegistrationActivity
 import com.souvenotes.souvenotes.utils.SimpleTextWatcher
 import com.souvenotes.souvenotes.utils.hideKeyboard
 import kotlinx.android.synthetic.main.activity_login.*
@@ -26,6 +27,8 @@ class LoginActivity : AppCompatActivity(), ILoginContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        supportActionBar?.setTitle(R.string.title_login)
 
         firebaseAuth = FirebaseAuth.getInstance()
 
@@ -47,6 +50,10 @@ class LoginActivity : AppCompatActivity(), ILoginContract.View {
 
         button_sign_up.setOnClickListener {
             loginPresenter.onLoginButtonClicked()
+        }
+
+        create_account.setOnClickListener {
+            startActivity(Intent(this, RegistrationActivity::class.java))
         }
     }
 
@@ -80,6 +87,8 @@ class LoginActivity : AppCompatActivity(), ILoginContract.View {
         startActivity(toNotesList)
     }
 
+    //ERROR_USER_NOT_FOUND
+    //ERROR_WRONG_PASSWORD
     override fun logInUser(email: String, password: String) {
         hideKeyboard(login_parent)
         firebaseAuth?.signInWithEmailAndPassword(email, password)?.addOnCompleteListener(

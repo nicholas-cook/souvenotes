@@ -20,7 +20,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".loginoptions.LoginOptionsActivity"/>
         <activity android:name=".registration.RegistrationActivity"/>
         <activity android:name=".list.NotesListActivity"/>
         <activity android:name=".note.AddNoteActivity"/>

@@ -26,6 +26,9 @@ class RegistrationActivity : AppCompatActivity(), IRegistrationContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
 
+        supportActionBar?.setTitle(R.string.title_registration)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         firebaseAuth = FirebaseAuth.getInstance()
 
         model = savedInstanceState?.getParcelable(EXTRA_REGISTRATION_MODEL) ?: RegistrationModel()
@@ -54,6 +57,11 @@ class RegistrationActivity : AppCompatActivity(), IRegistrationContract.View {
             }
         })
         password_confirmation.setText(model.passwordConfirmation)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
