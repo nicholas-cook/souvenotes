@@ -53,6 +53,10 @@ class LoginActivity : AppCompatActivity(), ILoginContract.View {
         create_account.setOnClickListener {
             startActivity(Intent(this, RegistrationActivity::class.java))
         }
+
+        forgot_password.setOnClickListener {
+            startActivity(Intent(this, ForgotPasswordActivity::class.java))
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

@@ -29,6 +29,13 @@
     <string name="create_account">Create Account</string>
     <string name="confirm_password">Confirm password</string>
     <string name="registration_error">Unable to complete sign up</string>
+    <string name="forgot_password">Forgot Password?</string>
+
+    <!-- Password Reset -->
+    <string name="title_reset_password">Reset Password</string>
+    <string name="reset_password_error">Unable to reset password</string>
+    <string name="action_reset">Reset</string>
+    <string name="reset_email_sent">Password reset email sent</string>
 
     <!-- Notes List -->
     <string name="title_notes">Notes</string>
