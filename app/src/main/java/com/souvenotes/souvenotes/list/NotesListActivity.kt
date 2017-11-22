@@ -7,6 +7,8 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.RecyclerView
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
@@ -47,6 +49,22 @@ class NotesListActivity : AppCompatActivity(), IListContract.View {
         add_note.setOnClickListener {
             startActivity(Intent(this, AddNoteActivity::class.java))
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_notes_list, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.logout -> {
+                notesAdapter?.stopListening()
+                LoginActivity.logout(this)
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onStart() {

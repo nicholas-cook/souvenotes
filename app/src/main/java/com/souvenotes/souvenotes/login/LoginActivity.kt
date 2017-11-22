@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
+import com.google.firebase.auth.FirebaseAuth
 import com.souvenotes.souvenotes.R
 import com.souvenotes.souvenotes.list.NotesListActivity
 import com.souvenotes.souvenotes.models.LoginModel
@@ -109,6 +110,7 @@ class LoginActivity : AppCompatActivity(), ILoginContract.View {
         private const val EXTRA_LOGIN_MODEL = "com.souvenotes.souvenotes.login.EXTRA_LOGIN_MODEL"
 
         fun logout(context: Context) {
+            FirebaseAuth.getInstance().signOut()
             val logout = Intent(context, LoginActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK.or(Intent.FLAG_ACTIVITY_CLEAR_TASK)
             }

@@ -58,4 +58,7 @@
     <string name="title_edit_note">Edit Note</string>
     <string name="title_add_note">Add Note</string>
 
+    <!-- Menu -->
+    <string name="action_logout">Logout</string>
+
 </resources>
