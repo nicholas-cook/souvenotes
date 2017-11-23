@@ -61,4 +61,9 @@
     <!-- Menu -->
     <string name="action_logout">Logout</string>
 
+    <!-- Reauth -->
+    <string name="reauth_error">Unable to confirm credentials</string>
+    <string name="action_submit">Submit</string>
+    <string name="title_reauth">Re-enter Your Credentials</string>
+
 </resources>
