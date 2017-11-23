@@ -1,4 +1,4 @@
-package com.souvenotes.souvenotes.account
+package com.souvenotes.souvenotes.settings.reauth
 
 import com.google.firebase.auth.*
 import com.souvenotes.souvenotes.R
@@ -7,7 +7,8 @@ import com.souvenotes.souvenotes.models.LoginModel
 /**
  * Created by nicholascook on 11/22/17.
  */
-class ReauthPresenter(private var reauthView: IReauthContract.View?) : IReauthContract.Presenter {
+class ReauthPresenter(private var reauthView: IReauthContract.View?) :
+        IReauthContract.Presenter {
 
     private var loginModel = LoginModel()
 

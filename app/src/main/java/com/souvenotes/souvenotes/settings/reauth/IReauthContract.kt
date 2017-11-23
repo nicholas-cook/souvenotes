@@ -1,4 +1,4 @@
-package com.souvenotes.souvenotes.account
+package com.souvenotes.souvenotes.settings.reauth
 
 import android.support.annotation.StringRes
 import com.souvenotes.souvenotes.models.LoginModel

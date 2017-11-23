@@ -1,4 +1,4 @@
-package com.souvenotes.souvenotes.account
+package com.souvenotes.souvenotes.settings.reauth
 
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -26,7 +26,8 @@ class ReauthFragment : Fragment(), IReauthContract.View {
             savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_reauth, container, false)
 
-        loginModel = savedInstanceState?.getParcelable(EXTRA_LOGIN_MODEL) ?: LoginModel()
+        loginModel = savedInstanceState?.getParcelable(
+                EXTRA_LOGIN_MODEL) ?: LoginModel()
         reauthPresenter = ReauthPresenter(this)
 
         view.reauth_email.addTextChangedListener(object : SimpleTextWatcher() {
@@ -50,7 +51,8 @@ class ReauthFragment : Fragment(), IReauthContract.View {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putParcelable(EXTRA_LOGIN_MODEL, loginModel)
+        outState.putParcelable(
+                EXTRA_LOGIN_MODEL, loginModel)
         super.onSaveInstanceState(outState)
     }
 
