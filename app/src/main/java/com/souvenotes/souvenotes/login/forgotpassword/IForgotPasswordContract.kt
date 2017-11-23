@@ -1,4 +1,4 @@
-package com.souvenotes.souvenotes.login
+package com.souvenotes.souvenotes.login.forgotpassword
 
 import android.support.annotation.StringRes
 

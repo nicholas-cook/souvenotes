@@ -1,4 +1,4 @@
-package com.souvenotes.souvenotes.login
+package com.souvenotes.souvenotes.login.forgotpassword
 
 import android.util.Patterns
 import com.google.firebase.auth.FirebaseAuth
@@ -9,7 +9,8 @@ import com.souvenotes.souvenotes.R
  * Created on 11/21/17.
  */
 class ForgotPasswordPresenter(
-    private var forgotView: IForgotPasswordContract.View?) : IForgotPasswordContract.Presenter {
+    private var forgotView: IForgotPasswordContract.View?) :
+        IForgotPasswordContract.Presenter {
 
     private var email: String? = null
 

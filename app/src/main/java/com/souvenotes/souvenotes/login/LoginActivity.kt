@@ -9,6 +9,7 @@ import android.text.Editable
 import com.google.firebase.auth.FirebaseAuth
 import com.souvenotes.souvenotes.R
 import com.souvenotes.souvenotes.list.NotesListActivity
+import com.souvenotes.souvenotes.login.forgotpassword.ForgotPasswordActivity
 import com.souvenotes.souvenotes.models.LoginModel
 import com.souvenotes.souvenotes.registration.RegistrationActivity
 import com.souvenotes.souvenotes.utils.SimpleTextWatcher

@@ -23,7 +23,7 @@
         <activity android:name=".registration.RegistrationActivity"/>
         <activity android:name=".list.NotesListActivity"/>
         <activity android:name=".note.AddNoteActivity"/>
-        <activity android:name=".login.ForgotPasswordActivity"/>
+        <activity android:name=".login.forgotpassword.ForgotPasswordActivity"/>
     </application>
 
 </manifest>
