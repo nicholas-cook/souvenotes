@@ -17,10 +17,11 @@ import com.souvenotes.souvenotes.R
 import com.souvenotes.souvenotes.login.LoginActivity
 import com.souvenotes.souvenotes.models.NoteListModel
 import com.souvenotes.souvenotes.note.AddNoteActivity
+import com.souvenotes.souvenotes.settings.SettingsActivity
 import kotlinx.android.synthetic.main.activity_notes_list.*
 
 /**
- * Created by NicholasCook on 10/15/17.
+ * Created on 10/15/17.
  */
 class NotesListActivity : AppCompatActivity(), IListContract.View {
 
@@ -62,6 +63,9 @@ class NotesListActivity : AppCompatActivity(), IListContract.View {
                 notesAdapter?.stopListening()
                 LoginActivity.logout(this)
                 return true
+            }
+            R.id.settings -> {
+                startActivity(Intent(this, SettingsActivity::class.java))
             }
         }
         return super.onOptionsItemSelected(item)

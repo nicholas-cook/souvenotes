@@ -7,22 +7,13 @@
     android:layout_margin="@dimen/default_margin"
     android:orientation="vertical">
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/reauth_email_parent"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="32dp"
-        android:hint="@string/hint_email"
-        app:errorEnabled="true">
-
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/reauth_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:maxLength="100" />
-    </android.support.design.widget.TextInputLayout>
+        android:layout_marginBottom="8dp"
+        android:text="@string/re_enter_password"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/reauth_password_parent"

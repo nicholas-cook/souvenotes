@@ -1,7 +1,7 @@
-<manifest package="com.souvenotes.souvenotes"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.souvenotes.souvenotes">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".MainApplication"
@@ -16,14 +16,15 @@
         </activity>
         <activity android:name=".splash.SplashActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".registration.RegistrationActivity"/>
-        <activity android:name=".list.NotesListActivity"/>
-        <activity android:name=".note.AddNoteActivity"/>
-        <activity android:name=".login.forgotpassword.ForgotPasswordActivity"/>
+        <activity android:name=".registration.RegistrationActivity" />
+        <activity android:name=".list.NotesListActivity" />
+        <activity android:name=".note.AddNoteActivity" />
+        <activity android:name=".login.forgotpassword.ForgotPasswordActivity" />
+        <activity android:name=".settings.SettingsActivity" />
     </application>
 
 </manifest>

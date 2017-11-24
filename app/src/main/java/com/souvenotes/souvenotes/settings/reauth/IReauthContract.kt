@@ -1,7 +1,6 @@
 package com.souvenotes.souvenotes.settings.reauth
 
 import android.support.annotation.StringRes
-import com.souvenotes.souvenotes.models.LoginModel
 
 /**
  * Created on 11/22/17.
@@ -9,8 +8,6 @@ import com.souvenotes.souvenotes.models.LoginModel
 interface IReauthContract {
 
     interface View {
-        fun setEmailError(isError: Boolean, @StringRes message: Int)
-
         fun setPasswordError(isError: Boolean, @StringRes message: Int)
 
         fun setSubmitButtonEnabled(enabled: Boolean)
@@ -20,16 +17,14 @@ interface IReauthContract {
         fun onReauthSuccess()
 
         fun onReauthFailed(@StringRes message: Int)
+
+        fun logout()
     }
 
     interface Presenter {
-        fun onEmailEntered(email: String?)
-
         fun onPasswordEntered(password: String?)
 
         fun onSubmitButtonClicked()
-
-        fun setLoginModel(loginModel: LoginModel)
 
         fun nullifyView()
     }

@@ -61,9 +61,16 @@
     <!-- Menu -->
     <string name="action_logout">Logout</string>
 
+    <!-- Settings -->
+    <string name="change_email">Change Email Address</string>
+    <string name="change_password">Change Password</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="title_settings">Settings</string>
+
     <!-- Reauth -->
     <string name="reauth_error">Unable to confirm credentials</string>
     <string name="action_submit">Submit</string>
-    <string name="title_reauth">Re-enter Your Credentials</string>
+    <string name="log_back_in">Please log back in to complete this action.</string>
+    <string name="re_enter_password">Please re-enter your password</string>
 
 </resources>
