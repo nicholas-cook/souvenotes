@@ -3,6 +3,7 @@ package com.souvenotes.souvenotes.settings
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -30,6 +31,8 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.title_settings)
 
         val settingsOptions = resources.getStringArray(R.array.settings_options)
 
