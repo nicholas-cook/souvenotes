@@ -60,8 +60,7 @@ class NotesListActivity : AppCompatActivity(), IListContract.View {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.logout -> {
-                notesAdapter?.stopListening()
-                LoginActivity.logout(this)
+                showLogoutConfirmation()
                 return true
             }
             R.id.settings -> {
@@ -69,6 +68,21 @@ class NotesListActivity : AppCompatActivity(), IListContract.View {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun showLogoutConfirmation() {
+        val builder = AlertDialog.Builder(this).apply {
+            setMessage(R.string.confirm_logout)
+            setPositiveButton(R.string.action_logout, { dialog, _ ->
+                dialog.dismiss()
+                notesAdapter?.stopListening()
+                LoginActivity.logout(this@NotesListActivity)
+            })
+            setNegativeButton(android.R.string.cancel, { dialog, _ ->
+                dialog.dismiss()
+            })
+        }
+        builder.show()
     }
 
     override fun onStart() {
