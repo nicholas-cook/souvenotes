@@ -3,6 +3,7 @@ package com.souvenotes.souvenotes.settings
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.souvenotes.souvenotes.R
+import com.souvenotes.souvenotes.settings.email.ChangeEmailFragment
 import com.souvenotes.souvenotes.settings.reauth.ReauthFragment
 
 /**
@@ -38,7 +39,13 @@ class SettingsActivity : AppCompatActivity(), SettingsFragment.SettingsListener,
     }
 
     override fun loadEmailFragment() {
-        //TODO
+        var emailFragment = supportFragmentManager.findFragmentByTag(
+                TAG_EMAIL_FRAGMENT) as ChangeEmailFragment?
+        if (emailFragment == null) {
+            emailFragment = ChangeEmailFragment.newInstance()
+            supportFragmentManager.beginTransaction().replace(R.id.settings_holder, emailFragment,
+                    TAG_EMAIL_FRAGMENT).addToBackStack(null).commit()
+        }
     }
 
     override fun loadPasswordFragment() {
@@ -57,5 +64,6 @@ class SettingsActivity : AppCompatActivity(), SettingsFragment.SettingsListener,
     companion object {
         private const val TAG_SETTINGS_FRAGMENT = "com.souvenotes.souvenotes.settings.TAG_SETTINGS_FRAGMENT"
         private const val TAG_REAUTH_FRAGMENT = "com.souvenotes.souvenotes.settings.TAG_REAUTH_FRAGMENT"
+        private const val TAG_EMAIL_FRAGMENT = "com.souvenotes.souvenotes.settings.TAG_EMAIL_FRAGMENT"
     }
 }

@@ -74,6 +74,7 @@ class ReauthFragment : Fragment(), IReauthContract.View {
 
         reauth_password.addTextChangedListener(object : SimpleTextWatcher() {
             override fun afterTextChanged(s: Editable) {
+                password = s.toString()
                 reauthPresenter?.onPasswordEntered(s.toString())
             }
         })

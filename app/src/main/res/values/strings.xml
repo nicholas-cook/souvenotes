@@ -73,4 +73,10 @@
     <string name="log_back_in">Please log back in to complete this action.</string>
     <string name="re_enter_password">Please re-enter your password</string>
 
+    <!-- Change Email -->
+    <string name="email_exists">This email address is unavailable.</string>
+    <string name="change_email_error">Unable to change email address. Please try again later.</string>
+    <string name="hint_change_email">Enter new email address</string>
+    <string name="email_change_success">Email address successfully changed</string>
+
 </resources>
