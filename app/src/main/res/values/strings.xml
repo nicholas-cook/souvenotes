@@ -85,4 +85,9 @@
     <string name="hint_change_password">Enter new password</string>
     <string name="change_password_success">Password successfully changed</string>
 
+    <!-- Delete Account -->
+    <string name="delete_account_error">Unable to delete account. Please try again later.</string>
+    <string name="delete_message">Deleting your account will permanently delete all of your data. You will not be able to restore it.</string>
+    <string name="confirm_delete">Are you sure you want to permanently delete your account and all of your data?</string>
+
 </resources>

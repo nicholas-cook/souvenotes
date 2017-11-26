@@ -3,6 +3,7 @@ package com.souvenotes.souvenotes.settings
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.souvenotes.souvenotes.R
+import com.souvenotes.souvenotes.settings.delete.DeleteFragment
 import com.souvenotes.souvenotes.settings.email.ChangeEmailFragment
 import com.souvenotes.souvenotes.settings.password.ChangePasswordFragment
 import com.souvenotes.souvenotes.settings.reauth.ReauthFragment
@@ -59,7 +60,13 @@ class SettingsActivity : AppCompatActivity(), SettingsFragment.SettingsListener,
     }
 
     override fun loadDeleteFragment() {
-        //TODO
+        var deleteFragment = supportFragmentManager.findFragmentByTag(
+                TAG_DELETE_FRAGMENT) as DeleteFragment?
+        if (deleteFragment == null) {
+            deleteFragment = DeleteFragment.newInstance()
+            supportFragmentManager.beginTransaction().replace(R.id.settings_holder, deleteFragment,
+                    TAG_DELETE_FRAGMENT).addToBackStack(null).commit()
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -72,5 +79,6 @@ class SettingsActivity : AppCompatActivity(), SettingsFragment.SettingsListener,
         private const val TAG_REAUTH_FRAGMENT = "com.souvenotes.souvenotes.settings.TAG_REAUTH_FRAGMENT"
         private const val TAG_EMAIL_FRAGMENT = "com.souvenotes.souvenotes.settings.TAG_EMAIL_FRAGMENT"
         private const val TAG_PASSWORD_FRAGMENT = "com.souvenotes.souvenotes.settings.TAG_PASSWORD_FRAGMENT"
+        private const val TAG_DELETE_FRAGMENT = "com.souvenotes.souvenotes.settings.TAG_DELETE_FRAGMENT"
     }
 }
