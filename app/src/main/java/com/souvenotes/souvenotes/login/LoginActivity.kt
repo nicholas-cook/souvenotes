@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
+import android.view.View
 import com.google.firebase.auth.FirebaseAuth
 import com.souvenotes.souvenotes.R
 import com.souvenotes.souvenotes.list.NotesListActivity
@@ -64,6 +65,15 @@ class LoginActivity : AppCompatActivity(), ILoginContract.View {
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putParcelable(EXTRA_LOGIN_MODEL, loginModel)
         super.onSaveInstanceState(outState)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        loginPresenter?.nullifyView()
+    }
+
+    override fun setProgressBarVisible(visible: Boolean) {
+        progress_bar.visibility = if (visible) View.VISIBLE else View.INVISIBLE
     }
 
     override fun setEmailError(isError: Boolean, message: Int) {

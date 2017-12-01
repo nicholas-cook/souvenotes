@@ -20,7 +20,7 @@ class DeleteFragment : Fragment(), IDeleteContract.View {
     private var deletePresenter: IDeleteContract.Presenter? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View? {
         deletePresenter = DeletePresenter(this)
         return inflater.inflate(R.layout.fragment_delete, container, false)
     }
@@ -50,6 +50,10 @@ class DeleteFragment : Fragment(), IDeleteContract.View {
     override fun onStop() {
         super.onStop()
         deletePresenter?.nullifyView()
+    }
+
+    override fun setProgressBarVisible(visible: Boolean) {
+        progress_bar.visibility = if (visible) View.VISIBLE else View.INVISIBLE
     }
 
     override fun onAccountDeleted() {

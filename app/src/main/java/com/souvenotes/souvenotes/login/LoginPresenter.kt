@@ -10,7 +10,7 @@ import com.souvenotes.souvenotes.models.LoginModel
 /**
  * Created by NicholasCook on 10/14/17.
  */
-class LoginPresenter(private val loginView: ILoginContract.View?) : ILoginContract.Presenter {
+class LoginPresenter(private var loginView: ILoginContract.View?) : ILoginContract.Presenter {
 
     private var loginModel = LoginModel()
 
@@ -45,8 +45,10 @@ class LoginPresenter(private val loginView: ILoginContract.View?) : ILoginContra
         }
         if (valid) {
             loginView?.hideKeyboard()
+            loginView?.setProgressBarVisible(true)
             FirebaseAuth.getInstance().signInWithEmailAndPassword(loginModel.email,
                     loginModel.password).addOnCompleteListener { result ->
+                loginView?.setProgressBarVisible(false)
                 if (result.isSuccessful) {
                     loginView?.onLoginSuccess()
                 } else {
@@ -64,5 +66,9 @@ class LoginPresenter(private val loginView: ILoginContract.View?) : ILoginContra
 
     override fun setLoginModel(loginModel: LoginModel) {
         this.loginModel = loginModel
+    }
+
+    override fun nullifyView() {
+        loginView = null
     }
 }

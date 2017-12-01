@@ -15,19 +15,21 @@ class DeletePresenter(private var deleteView: IDeleteContract.View?) : IDeleteCo
         if (user == null) {
             deleteView?.logout()
         } else {
-           deleteData(user)
+            deleteData(user)
         }
     }
 
     private fun deleteData(user: FirebaseUser) {
+        deleteView?.setProgressBarVisible(true)
         val childUpdates = HashMap<String, Any?>()
         childUpdates.put("/notes/${user.uid}", null)
         childUpdates.put("/notes-list/${user.uid}", null)
         FirebaseDatabase.getInstance().reference.updateChildren(
-                childUpdates).addOnCompleteListener { result ->
+            childUpdates).addOnCompleteListener { result ->
             if (result.isSuccessful) {
                 deleteUser(user)
             } else {
+                deleteView?.setProgressBarVisible(false)
                 deleteView?.onDeletionError(R.string.delete_error)
             }
         }
@@ -35,6 +37,7 @@ class DeletePresenter(private var deleteView: IDeleteContract.View?) : IDeleteCo
 
     private fun deleteUser(user: FirebaseUser) {
         user.delete().addOnCompleteListener { result ->
+            deleteView?.setProgressBarVisible(false)
             if (result.isSuccessful) {
                 deleteView?.onAccountDeleted()
             } else {

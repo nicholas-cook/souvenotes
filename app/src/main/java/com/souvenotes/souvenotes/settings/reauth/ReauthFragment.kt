@@ -36,13 +36,13 @@ class ReauthFragment : Fragment(), IReauthContract.View {
     private var password: String? = ""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_reauth, container, false)
 
         password = savedInstanceState?.getString(EXTRA_PASSWORD) ?: ""
         settingsType = savedInstanceState?.getSerializable(
-                EXTRA_SETTINGS_TYPE) as SettingsFragment.SettingsType? ?: arguments.getSerializable(
-                EXTRA_SETTINGS_TYPE) as SettingsFragment.SettingsType?
+            EXTRA_SETTINGS_TYPE) as SettingsFragment.SettingsType? ?: arguments.getSerializable(
+            EXTRA_SETTINGS_TYPE) as SettingsFragment.SettingsType?
         reauthPresenter = ReauthPresenter(this)
 
         when (settingsType) {
@@ -94,6 +94,10 @@ class ReauthFragment : Fragment(), IReauthContract.View {
     override fun onStop() {
         super.onStop()
         reauthPresenter?.nullifyView()
+    }
+
+    override fun setProgressBarVisible(visible: Boolean) {
+        progress_bar.visibility = if (visible) View.VISIBLE else View.INVISIBLE
     }
 
     override fun setPasswordError(isError: Boolean, message: Int) {

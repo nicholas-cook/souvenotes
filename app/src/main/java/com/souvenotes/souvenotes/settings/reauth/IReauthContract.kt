@@ -19,6 +19,8 @@ interface IReauthContract {
         fun onReauthFailed(@StringRes message: Int)
 
         fun logout()
+
+        fun setProgressBarVisible(visible: Boolean)
     }
 
     interface Presenter {

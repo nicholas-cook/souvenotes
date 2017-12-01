@@ -23,7 +23,7 @@ class ChangePasswordFragment : Fragment(), IChangePasswordContract.View {
     private var password = ""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View? {
         password = savedInstanceState?.getString(EXTRA_PASSWORD) ?: ""
         passwordPresenter = ChangePasswordPresenter(this)
         return inflater.inflate(R.layout.fragment_change_password, container, false)
@@ -53,6 +53,10 @@ class ChangePasswordFragment : Fragment(), IChangePasswordContract.View {
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putString(EXTRA_PASSWORD, password)
         super.onSaveInstanceState(outState)
+    }
+
+    override fun setProgressBarVisible(visible: Boolean) {
+        progress_bar.visibility = if (visible) View.VISIBLE else View.INVISIBLE
     }
 
     override fun setSubmitButtonEnabled(enabled: Boolean) {

@@ -23,7 +23,7 @@ class ChangeEmailFragment : Fragment(), IChangeEmailContract.View {
     private var email = ""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View? {
         emailPresenter = ChangeEmailPresenter(this)
 
         email = savedInstanceState?.getString(EXTRA_EMAIL) ?: ""
@@ -55,6 +55,10 @@ class ChangeEmailFragment : Fragment(), IChangeEmailContract.View {
     override fun onStop() {
         super.onStop()
         emailPresenter?.nullifyView()
+    }
+
+    override fun setProgressBarVisible(visible: Boolean) {
+        progress_bar.visibility = if (visible) View.VISIBLE else View.INVISIBLE
     }
 
     override fun setSubmitButtonEnabled(enabled: Boolean) {

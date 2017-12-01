@@ -7,7 +7,7 @@ import com.souvenotes.souvenotes.R
  * Created on 11/24/17.
  */
 class ChangePasswordPresenter(private var passwordView: IChangePasswordContract.View?) :
-        IChangePasswordContract.Presenter {
+    IChangePasswordContract.Presenter {
 
     private var password = ""
 
@@ -30,7 +30,9 @@ class ChangePasswordPresenter(private var passwordView: IChangePasswordContract.
             if (user == null) {
                 passwordView?.logout()
             } else {
+                passwordView?.setProgressBarVisible(true)
                 user.updatePassword(password).addOnCompleteListener { result ->
+                    passwordView?.setProgressBarVisible(false)
                     if (result.isSuccessful) {
                         passwordView?.onPasswordChanged()
                     } else {

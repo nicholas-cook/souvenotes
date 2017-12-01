@@ -19,6 +19,8 @@ interface IChangeEmailContract {
         fun onEmailChangeFailed(@StringRes message: Int)
 
         fun logout()
+
+        fun setProgressBarVisible(visible: Boolean)
     }
 
     interface Presenter {

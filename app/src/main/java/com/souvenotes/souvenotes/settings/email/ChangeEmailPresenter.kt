@@ -9,7 +9,7 @@ import com.souvenotes.souvenotes.R
  * Created on 11/24/17.
  */
 class ChangeEmailPresenter(private var emailView: IChangeEmailContract.View?) :
-        IChangeEmailContract.Presenter {
+    IChangeEmailContract.Presenter {
 
     private var email = ""
 
@@ -33,13 +33,15 @@ class ChangeEmailPresenter(private var emailView: IChangeEmailContract.View?) :
         if (user == null) {
             emailView?.logout()
         } else {
+            emailView?.setProgressBarVisible(true)
             user.updateEmail(email).addOnCompleteListener { result ->
+                emailView?.setProgressBarVisible(false)
                 if (result.isSuccessful) {
                     emailView?.onEmailChanged()
                 } else {
                     when {
                         result.exception is FirebaseAuthUserCollisionException -> emailView?.onEmailChangeFailed(
-                                R.string.email_exists)
+                            R.string.email_exists)
                         else -> emailView?.onEmailChangeFailed(R.string.change_email_error)
                     }
                 }

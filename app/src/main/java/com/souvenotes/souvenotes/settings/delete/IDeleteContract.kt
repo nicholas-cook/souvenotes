@@ -13,6 +13,8 @@ interface IDeleteContract {
         fun onDeletionError(@StringRes message: Int)
 
         fun logout()
+
+        fun setProgressBarVisible(visible: Boolean)
     }
 
     interface Presenter {

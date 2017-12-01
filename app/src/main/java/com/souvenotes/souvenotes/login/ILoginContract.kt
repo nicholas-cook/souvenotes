@@ -20,6 +20,8 @@ interface ILoginContract {
         fun onLoginSuccess()
 
         fun onLoginFailed(@StringRes message: Int)
+
+        fun setProgressBarVisible(visible: Boolean)
     }
 
     interface Presenter {
@@ -30,5 +32,7 @@ interface ILoginContract {
         fun onLoginButtonClicked()
 
         fun setLoginModel(loginModel: LoginModel)
+
+        fun nullifyView()
     }
 }

@@ -28,8 +28,10 @@ class ReauthPresenter(private var reauthView: IReauthContract.View?) :
         if (user == null) {
             reauthView?.logout()
         } else {
+            reauthView?.setProgressBarVisible(true)
             val credential = EmailAuthProvider.getCredential(user.email ?: "", password)
             user.reauthenticate(credential).addOnCompleteListener { result ->
+                reauthView?.setProgressBarVisible(false)
                 if (result.isSuccessful) {
                     reauthView?.onReauthSuccess()
                 } else {
