@@ -11,8 +11,11 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import com.souvenotes.souvenotes.BuildConfig
 import com.souvenotes.souvenotes.R
 import com.souvenotes.souvenotes.login.LoginActivity
 import com.souvenotes.souvenotes.models.NoteListModel
@@ -49,6 +52,18 @@ class NotesListActivity : AppCompatActivity(), IListContract.View {
         })
         add_note.setOnClickListener {
             startActivity(Intent(this, AddNoteActivity::class.java))
+        }
+        if (BuildConfig.DEBUG) {
+            ad_view.adListener = object : AdListener() {
+                override fun onAdLoaded() {
+                    ad_view.visibility = View.VISIBLE
+                }
+
+                override fun onAdFailedToLoad(errorCode: Int) {
+                    ad_view.visibility = View.GONE
+                }
+            }
+            ad_view.loadAd(AdRequest.Builder().build())
         }
     }
 

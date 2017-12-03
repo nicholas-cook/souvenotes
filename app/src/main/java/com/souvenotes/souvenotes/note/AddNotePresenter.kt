@@ -51,8 +51,7 @@ class AddNotePresenter(private val addNoteView: IAddNotesContract.View?,
     }
 
     override fun saveNote(title: String, content: String) {
-        if ((existingNote.title != title || existingNote.content != content)
-                && !isNoteEmpty(title, content)) {
+        if ((existingNote.title != title || existingNote.content != content)) {
             val notesValues = NoteModel(title, content).toMap()
             val timestamp = System.currentTimeMillis()
             val noteListValues = NoteListModel(title, -1 * timestamp).toMap()
@@ -92,9 +91,5 @@ class AddNotePresenter(private val addNoteView: IAddNotesContract.View?,
         if (notesKey == null) {
             addNoteView?.onNoteDeleted()
         }
-    }
-
-    private fun isNoteEmpty(title: String, content: String): Boolean {
-        return title.isEmpty() && content.isEmpty()
     }
 }

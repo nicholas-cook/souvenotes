@@ -20,7 +20,10 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
         supportActionBar?.hide()
+    }
 
+    override fun onResume() {
+        super.onResume()
         firebaseAuth = FirebaseAuth.getInstance()
         if (firebaseAuth?.currentUser == null) {
             startActivity(Intent(this, LoginActivity::class.java))
