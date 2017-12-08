@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.souvenotes.souvenotes.R
 import com.souvenotes.souvenotes.list.NotesListActivity
 import com.souvenotes.souvenotes.login.LoginActivity
 
@@ -17,13 +16,7 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
 
-        supportActionBar?.hide()
-    }
-
-    override fun onResume() {
-        super.onResume()
         firebaseAuth = FirebaseAuth.getInstance()
         if (firebaseAuth?.currentUser == null) {
             startActivity(Intent(this, LoginActivity::class.java))
