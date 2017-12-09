@@ -39,7 +39,7 @@ class NotesListActivity : AppCompatActivity(), IListContract.View {
 
         notesAdapter = NotesListAdapter(this, getListOptions())
         notes_recycler_view.addItemDecoration(
-                DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+            DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         notes_recycler_view.adapter = notesAdapter
         notes_recycler_view.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
@@ -121,9 +121,17 @@ class NotesListActivity : AppCompatActivity(), IListContract.View {
             ) { dialog, _ ->
                 dialog.dismiss()
                 listPresenter?.deleteNote(noteKey)
+                notesAdapter?.resetSelectedPosition()
             }
             setNegativeButton(android.R.string.cancel
-            ) { dialog, _ -> dialog.dismiss() }
+            ) { dialog, _ ->
+                dialog.dismiss()
+                notesAdapter?.resetSelectedPosition()
+            }
+            setOnCancelListener { dialog ->
+                dialog.dismiss()
+                notesAdapter?.resetSelectedPosition()
+            }
         }
         builder.show()
     }
@@ -170,8 +178,8 @@ class NotesListActivity : AppCompatActivity(), IListContract.View {
             logout()
         }
         return FirebaseRecyclerOptions.Builder<NoteListModel>()
-                .setQuery(databaseRef.child("notes-list").child(userId).orderByChild(
-                        "timestamp").limitToLast(110), NoteListModel::class.java)
-                .build()
+            .setQuery(databaseRef.child("notes-list").child(userId).orderByChild(
+                "timestamp").limitToLast(110), NoteListModel::class.java)
+            .build()
     }
 }

@@ -18,21 +18,32 @@ import kotlinx.android.synthetic.main.notes_list_item.view.*
  */
 class NotesListAdapter(private val activity: NotesListActivity,
                        options: FirebaseRecyclerOptions<NoteListModel>) :
-        FirebaseRecyclerAdapter<NoteListModel, NotesListAdapter.NotesViewHolder>(options) {
+    FirebaseRecyclerAdapter<NoteListModel, NotesListAdapter.NotesViewHolder>(options) {
+
+    private var selectedPosition = -1
 
     override fun onBindViewHolder(holder: NotesViewHolder, position: Int, model: NoteListModel) {
         holder.itemView.note_title.text = if (model.title.isEmpty()) holder.itemView.context.getString(
-                R.string.untitled) else model.title
+            R.string.untitled) else model.title
         holder.itemView.note_date.text = holder.itemView.context.getString(R.string.last_updated,
-                DateTimeUtils.getDisplayFormat(-1 * model.timestamp))
+            DateTimeUtils.getDisplayFormat(-1 * model.timestamp))
         holder.itemView.setOnClickListener {
             val notesKey = getRef(holder.adapterPosition).key
             AddNoteActivity.editNote(holder.itemView.context, notesKey)
         }
         holder.itemView.setOnLongClickListener {
             activity.showNoteDeletionConfirmation(getRef(holder.adapterPosition).key)
+            selectedPosition = holder.adapterPosition
+            holder.itemView.isSelected = true
             true
         }
+        holder.itemView.isSelected = holder.adapterPosition == selectedPosition
+    }
+
+    fun resetSelectedPosition() {
+        val previousPosition = selectedPosition
+        selectedPosition = -1
+        notifyItemChanged(previousPosition)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotesViewHolder {
