@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_registration.*
  */
 class RegistrationActivity : AppCompatActivity(), IRegistrationContract.View {
 
-    private val presenter = RegistrationPresenter(this)
+    private var presenter: RegistrationPresenter? = null
     private var model = RegistrationModel()
     private var firebaseAuth: FirebaseAuth? = null
 
@@ -32,31 +32,41 @@ class RegistrationActivity : AppCompatActivity(), IRegistrationContract.View {
         firebaseAuth = FirebaseAuth.getInstance()
 
         model = savedInstanceState?.getParcelable(EXTRA_REGISTRATION_MODEL) ?: RegistrationModel()
-        presenter.setRegistrationModel(model)
 
         button_registration.setOnClickListener {
-            presenter.onRegisterButtonClicked()
+            presenter?.onRegisterButtonClicked()
         }
         register_email.addTextChangedListener(object : SimpleTextWatcher() {
             override fun afterTextChanged(s: Editable) {
-                presenter.onEmailEntered(s.toString())
+                presenter?.onEmailEntered(s.toString())
             }
         })
         register_email.setText(model.email)
 
         register_password.addTextChangedListener(object : SimpleTextWatcher() {
             override fun afterTextChanged(s: Editable) {
-                presenter.onPasswordEntered(s.toString())
+                presenter?.onPasswordEntered(s.toString())
             }
         })
         register_password.setText(model.password)
 
         password_confirmation.addTextChangedListener(object : SimpleTextWatcher() {
             override fun afterTextChanged(s: Editable) {
-                presenter.onPasswordConfirmationEntered(s.toString())
+                presenter?.onPasswordConfirmationEntered(s.toString())
             }
         })
         password_confirmation.setText(model.passwordConfirmation)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        presenter = RegistrationPresenter(this)
+        presenter?.setRegistrationModel(model)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        presenter?.nullifyView()
     }
 
     override fun onSupportNavigateUp(): Boolean {

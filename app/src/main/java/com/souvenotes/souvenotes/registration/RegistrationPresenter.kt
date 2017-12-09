@@ -7,7 +7,8 @@ import com.souvenotes.souvenotes.models.RegistrationModel
 /**
  * Created by NicholasCook on 10/11/17.
  */
-class RegistrationPresenter(private val view: IRegistrationContract.View?) : IRegistrationContract.Presenter {
+class RegistrationPresenter(private var view: IRegistrationContract.View?) :
+    IRegistrationContract.Presenter {
 
     private var model = RegistrationModel()
 
@@ -38,7 +39,7 @@ class RegistrationPresenter(private val view: IRegistrationContract.View?) : IRe
 
     private fun validateModel() {
         view?.setRegisterButtonEnabled(model.email.isNotBlank() && model.password.isNotEmpty()
-                && model.passwordConfirmation.isNotEmpty())
+            && model.passwordConfirmation.isNotEmpty())
     }
 
     override fun onRegisterButtonClicked() {
@@ -70,5 +71,9 @@ class RegistrationPresenter(private val view: IRegistrationContract.View?) : IRe
         if (valid) {
             view?.registerUser(model.email, model.password)
         }
+    }
+
+    override fun nullifyView() {
+        view = null
     }
 }

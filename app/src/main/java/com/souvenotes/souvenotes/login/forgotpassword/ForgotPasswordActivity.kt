@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.activity_forgot_password.*
  * Created on 11/21/17.
  */
 class ForgotPasswordActivity : AppCompatActivity(),
-        IForgotPasswordContract.View {
+    IForgotPasswordContract.View {
 
     private var forgotPresenter: IForgotPasswordContract.Presenter? = null
     private var email: String? = null
@@ -25,10 +25,8 @@ class ForgotPasswordActivity : AppCompatActivity(),
         supportActionBar?.setTitle(R.string.title_reset_password)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        forgotPresenter = ForgotPasswordPresenter(
-                this)
         email = savedInstanceState?.getString(
-                EXTRA_EMAIL) ?: ""
+            EXTRA_EMAIL) ?: ""
 
         forgot_email.addTextChangedListener(object : SimpleTextWatcher() {
             override fun afterTextChanged(s: Editable) {
@@ -51,8 +49,13 @@ class ForgotPasswordActivity : AppCompatActivity(),
 
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putString(
-                EXTRA_EMAIL, email)
+            EXTRA_EMAIL, email)
         super.onSaveInstanceState(outState)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        forgotPresenter = ForgotPasswordPresenter(this)
     }
 
     override fun onStop() {

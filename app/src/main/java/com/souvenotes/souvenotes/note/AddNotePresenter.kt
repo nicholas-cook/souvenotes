@@ -10,9 +10,9 @@ import com.souvenotes.souvenotes.models.NoteModel
 /**
  * Created by NicholasCook on 10/23/17.
  */
-class AddNotePresenter(private val addNoteView: IAddNotesContract.View?,
+class AddNotePresenter(private var addNoteView: IAddNotesContract.View?,
                        private val notesKey: String?) :
-        IAddNotesContract.Presenter {
+    IAddNotesContract.Presenter {
 
     private var existingNotesRef: DatabaseReference? = null
     private var valueEventListener: ValueEventListener? = null
@@ -26,7 +26,7 @@ class AddNotePresenter(private val addNoteView: IAddNotesContract.View?,
         }
         notesKey?.let {
             existingNotesRef = FirebaseDatabase.getInstance().reference.child("notes").child(
-                    userId).child(it)
+                userId).child(it)
             valueEventListener = object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val note = snapshot.getValue(NoteModel::class.java)
@@ -48,6 +48,7 @@ class AddNotePresenter(private val addNoteView: IAddNotesContract.View?,
 
     override fun stop() {
         existingNotesRef?.removeEventListener(valueEventListener)
+        addNoteView = null
     }
 
     override fun saveNote(title: String, content: String) {
@@ -62,7 +63,7 @@ class AddNotePresenter(private val addNoteView: IAddNotesContract.View?,
             childUpdates.put("/notes-list/$userId/$key", noteListValues)
 
             FirebaseDatabase.getInstance().reference.updateChildren(
-                    childUpdates).addOnFailureListener { exception ->
+                childUpdates).addOnFailureListener { exception ->
                 Log.w("AddNotePresenter", exception.message ?: "", exception)
                 if (notesKey != null) {
                     addNoteView?.onAddNoteError(R.string.add_note_error)
@@ -81,7 +82,7 @@ class AddNotePresenter(private val addNoteView: IAddNotesContract.View?,
             //Prevent triggering error for successful delete
             existingNotesRef?.removeEventListener(valueEventListener)
             FirebaseDatabase.getInstance().reference.updateChildren(
-                    childUpdates).addOnFailureListener {
+                childUpdates).addOnFailureListener {
                 existingNotesRef?.addValueEventListener(valueEventListener)
                 addNoteView?.onNoteDeleteError()
             }.addOnCompleteListener {

@@ -21,7 +21,6 @@ class DeleteFragment : Fragment(), IDeleteContract.View {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        deletePresenter = DeletePresenter(this)
         return inflater.inflate(R.layout.fragment_delete, container, false)
     }
 
@@ -45,6 +44,11 @@ class DeleteFragment : Fragment(), IDeleteContract.View {
             })
         }
         builder.show()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        deletePresenter = DeletePresenter(this)
     }
 
     override fun onStop() {

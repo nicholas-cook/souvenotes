@@ -37,12 +37,9 @@ class AddNoteActivity : AppCompatActivity(), IAddNotesContract.View {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         noteKey = savedInstanceState?.getString(EXTRA_NOTE_KEY) ?: intent?.getStringExtra(
-                EXTRA_NOTE_KEY)
+            EXTRA_NOTE_KEY)
 
         setTitle(if (noteKey != null) R.string.title_edit_note else R.string.title_add_note)
-
-        addNotePresenter = AddNotePresenter(this, noteKey)
-        addNotePresenter?.start()
 
         note_title.addTextChangedListener(object : SimpleTextWatcher() {
             override fun afterTextChanged(s: Editable) {
@@ -133,6 +130,12 @@ class AddNoteActivity : AppCompatActivity(), IAddNotesContract.View {
     override fun onNoteDeleted() {
         isDeleting = true
         finish()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        addNotePresenter = AddNotePresenter(this, noteKey)
+        addNotePresenter?.start()
     }
 
     override fun onStop() {

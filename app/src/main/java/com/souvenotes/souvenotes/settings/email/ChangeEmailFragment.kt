@@ -24,8 +24,6 @@ class ChangeEmailFragment : Fragment(), IChangeEmailContract.View {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        emailPresenter = ChangeEmailPresenter(this)
-
         email = savedInstanceState?.getString(EXTRA_EMAIL) ?: ""
 
         return inflater.inflate(R.layout.fragment_change_email, container, false)
@@ -50,6 +48,11 @@ class ChangeEmailFragment : Fragment(), IChangeEmailContract.View {
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putString(EXTRA_EMAIL, email)
         super.onSaveInstanceState(outState)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        emailPresenter = ChangeEmailPresenter(this)
     }
 
     override fun onStop() {

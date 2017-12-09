@@ -43,7 +43,6 @@ class ReauthFragment : Fragment(), IReauthContract.View {
         settingsType = savedInstanceState?.getSerializable(
             EXTRA_SETTINGS_TYPE) as SettingsFragment.SettingsType? ?: arguments.getSerializable(
             EXTRA_SETTINGS_TYPE) as SettingsFragment.SettingsType?
-        reauthPresenter = ReauthPresenter(this)
 
         when (settingsType) {
             SettingsFragment.SettingsType.EMAIL -> {
@@ -89,6 +88,11 @@ class ReauthFragment : Fragment(), IReauthContract.View {
         outState.putString(EXTRA_PASSWORD, password)
         outState.putSerializable(EXTRA_SETTINGS_TYPE, settingsType)
         super.onSaveInstanceState(outState)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        reauthPresenter = ReauthPresenter(this)
     }
 
     override fun onStop() {

@@ -25,7 +25,6 @@ class ChangePasswordFragment : Fragment(), IChangePasswordContract.View {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         password = savedInstanceState?.getString(EXTRA_PASSWORD) ?: ""
-        passwordPresenter = ChangePasswordPresenter(this)
         return inflater.inflate(R.layout.fragment_change_password, container, false)
     }
 
@@ -43,6 +42,11 @@ class ChangePasswordFragment : Fragment(), IChangePasswordContract.View {
         button_submit.setOnClickListener {
             passwordPresenter?.onSubmitButtonClicked()
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        passwordPresenter = ChangePasswordPresenter(this)
     }
 
     override fun onStop() {

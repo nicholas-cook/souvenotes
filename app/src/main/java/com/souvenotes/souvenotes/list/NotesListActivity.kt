@@ -35,8 +35,6 @@ class NotesListActivity : AppCompatActivity(), IListContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notes_list)
 
-        listPresenter = NotesListPresenter(this)
-
         notesAdapter = NotesListAdapter(this, getListOptions())
         notes_recycler_view.addItemDecoration(
             DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
@@ -102,6 +100,7 @@ class NotesListActivity : AppCompatActivity(), IListContract.View {
 
     override fun onStart() {
         super.onStart()
+        listPresenter = NotesListPresenter(this)
         notesAdapter?.startListening()
     }
 

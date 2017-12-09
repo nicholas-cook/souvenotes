@@ -31,8 +31,6 @@ class LoginActivity : AppCompatActivity(), ILoginContract.View {
 
         supportActionBar?.setTitle(R.string.title_login)
 
-        loginPresenter = LoginPresenter(this)
-
         loginModel = savedInstanceState?.getParcelable(EXTRA_LOGIN_MODEL) ?: LoginModel()
 
         login_email.addTextChangedListener(object : SimpleTextWatcher() {
@@ -65,6 +63,12 @@ class LoginActivity : AppCompatActivity(), ILoginContract.View {
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putParcelable(EXTRA_LOGIN_MODEL, loginModel)
         super.onSaveInstanceState(outState)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        loginPresenter = LoginPresenter(this)
+        loginPresenter?.setLoginModel(loginModel)
     }
 
     override fun onStop() {

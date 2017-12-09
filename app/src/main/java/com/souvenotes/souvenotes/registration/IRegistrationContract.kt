@@ -35,5 +35,7 @@ interface IRegistrationContract {
         fun onPasswordConfirmationEntered(passwordConfirmation: String?)
 
         fun onRegisterButtonClicked()
+
+        fun nullifyView()
     }
 }
