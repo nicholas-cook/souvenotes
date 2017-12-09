@@ -3,10 +3,15 @@
 
     <item android:drawable="@color/colorPrimary" />
 
-    <item>
+    <item android:top="-150dp">
         <bitmap
             android:gravity="center"
-            android:src="@mipmap/ic_splash" />
+            android:src="@mipmap/ic_splash_icon" />
+    </item>
+    <item android:top="150dp">
+        <bitmap
+            android:gravity="center"
+            android:src="@mipmap/ic_splash_name" />
     </item>
 
 </layer-list>
