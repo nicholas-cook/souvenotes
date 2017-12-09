@@ -4,7 +4,7 @@
     <!-- Login -->
     <string name="hint_email">Email Address</string>
     <string name="hint_password">Password</string>
-    <string name="log_in">Log In</string>
+    <string name="submit">Submit</string>
     <string name="login_error">Unable to log in</string>
     <string name="title_login">Log In To Souvenotes</string>
     <string name="error_credentials">Incorrect password</string>

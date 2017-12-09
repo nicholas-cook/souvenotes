@@ -8,7 +8,7 @@
 
     <include
         android:id="@+id/progress_bar"
-        layout="@layout/horizontal_progress_bar"/>
+        layout="@layout/horizontal_progress_bar" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:maxLength="100"/>
+                android:maxLength="100" />
         </android.support.design.widget.TextInputLayout>
 
         <Button
@@ -36,6 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="false"
-            android:text="@string/action_submit"/>
+            android:text="@string/action_submit"
+            android:textColor="@drawable/button_text_color" />
     </LinearLayout>
 </LinearLayout>
