@@ -80,14 +80,18 @@ class AddNotePresenter(private var addNoteView: IAddNotesContract.View?,
             childUpdates.put("/notes/$userId/$it", null)
             childUpdates.put("/notes-list/$userId/$it", null)
             //Prevent triggering error for successful delete
+            FirebaseDatabase.getInstance().reference.updateChildren(childUpdates)
+            existingNotesRef?.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onCancelled(error: DatabaseError) {
+                    existingNotesRef?.addValueEventListener(valueEventListener)
+                    addNoteView?.onNoteDeleteError()
+                }
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    addNoteView?.onNoteDeleted()
+                }
+            })
             existingNotesRef?.removeEventListener(valueEventListener)
-            FirebaseDatabase.getInstance().reference.updateChildren(
-                childUpdates).addOnFailureListener {
-                existingNotesRef?.addValueEventListener(valueEventListener)
-                addNoteView?.onNoteDeleteError()
-            }.addOnCompleteListener {
-                addNoteView?.onNoteDeleted()
-            }
         }
         if (notesKey == null) {
             addNoteView?.onNoteDeleted()
