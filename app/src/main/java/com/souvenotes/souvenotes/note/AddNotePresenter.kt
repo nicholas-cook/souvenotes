@@ -8,7 +8,7 @@ import com.souvenotes.souvenotes.models.NoteListModel
 import com.souvenotes.souvenotes.models.NoteModel
 
 /**
- * Created by NicholasCook on 10/23/17.
+ * Created on 10/23/17.
  */
 class AddNotePresenter(private var addNoteView: IAddNotesContract.View?,
                        private val notesKey: String?) :

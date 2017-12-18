@@ -21,7 +21,7 @@ import com.souvenotes.souvenotes.utils.SimpleTextWatcher
 import kotlinx.android.synthetic.main.activity_add_note.*
 
 /**
- * Created by NicholasCook on 10/23/17.
+ * Created on 10/23/17.
  */
 class AddNoteActivity : AppCompatActivity(), IAddNotesContract.View {
 
@@ -104,7 +104,8 @@ class AddNoteActivity : AppCompatActivity(), IAddNotesContract.View {
     }
 
     override fun onNoteLoaded(note: NoteModel) {
-        note_title.setText(note.title)
+        //Use append to move cursor to end of text
+        note_title.append(note.title)
         note_content.setText(note.content)
     }
 
