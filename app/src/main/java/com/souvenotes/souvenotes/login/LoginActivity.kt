@@ -18,7 +18,7 @@ import com.souvenotes.souvenotes.utils.hideKeyboard
 import kotlinx.android.synthetic.main.activity_login.*
 
 /**
- * Created by NicholasCook on 10/10/17.
+ * Created on 10/10/17.
  */
 class LoginActivity : AppCompatActivity(), ILoginContract.View {
 

@@ -5,7 +5,7 @@ import com.souvenotes.souvenotes.models.RegistrationModel
 import com.souvenotes.souvenotes.utils.IBasePresenter
 
 /**
- * Created by NicholasCook on 10/11/17.
+ * Created on 10/11/17.
  */
 interface IRegistrationContract {
 

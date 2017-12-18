@@ -3,7 +3,7 @@ package com.souvenotes.souvenotes.utils
 import org.joda.time.DateTime
 
 /**
- * Created by NicholasCook on 10/15/17.
+ * Created on 10/15/17.
  */
 object DateTimeUtils {
 

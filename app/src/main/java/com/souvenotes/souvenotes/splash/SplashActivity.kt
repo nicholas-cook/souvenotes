@@ -8,7 +8,7 @@ import com.souvenotes.souvenotes.list.NotesListActivity
 import com.souvenotes.souvenotes.login.LoginActivity
 
 /**
- * Created by NicholasCook on 10/10/17.
+ * Created on 10/10/17.
  */
 class SplashActivity : AppCompatActivity() {
 

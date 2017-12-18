@@ -16,7 +16,7 @@ import com.souvenotes.souvenotes.utils.hideKeyboard
 import kotlinx.android.synthetic.main.activity_registration.*
 
 /**
- * Created by NicholasCook on 10/11/17.
+ * Created on 10/11/17.
  */
 class RegistrationActivity : AppCompatActivity(), IRegistrationContract.View {
 

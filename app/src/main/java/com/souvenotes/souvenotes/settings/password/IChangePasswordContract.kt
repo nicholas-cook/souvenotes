@@ -3,7 +3,7 @@ package com.souvenotes.souvenotes.settings.password
 import android.support.annotation.StringRes
 
 /**
- * Created by nicholascook on 11/24/17.
+ * Created on 11/24/17.
  */
 interface IChangePasswordContract {
 

@@ -4,7 +4,7 @@ import android.support.annotation.StringRes
 import com.souvenotes.souvenotes.models.LoginModel
 
 /**
- * Created by NicholasCook on 10/14/17.
+ * Created on 10/14/17.
  */
 interface ILoginContract {
 

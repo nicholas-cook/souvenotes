@@ -1,7 +1,7 @@
 package com.souvenotes.souvenotes.list
 
 /**
- * Created by NicholasCook on 10/15/17.
+ * Created on 10/15/17.
  */
 interface IListContract {
 

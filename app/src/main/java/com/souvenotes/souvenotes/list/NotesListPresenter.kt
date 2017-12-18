@@ -4,7 +4,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
 /**
- * Created by NicholasCook on 10/15/17.
+ * Created on 10/15/17.
  */
 class NotesListPresenter(private val listView: IListContract.View?) : IListContract.Presenter {
 

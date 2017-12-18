@@ -5,7 +5,7 @@ import com.souvenotes.souvenotes.R
 import com.souvenotes.souvenotes.models.RegistrationModel
 
 /**
- * Created by NicholasCook on 10/11/17.
+ * Created on 10/11/17.
  */
 class RegistrationPresenter(private var view: IRegistrationContract.View?) :
     IRegistrationContract.Presenter {

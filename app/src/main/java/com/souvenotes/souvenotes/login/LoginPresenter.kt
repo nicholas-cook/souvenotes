@@ -8,7 +8,7 @@ import com.souvenotes.souvenotes.R
 import com.souvenotes.souvenotes.models.LoginModel
 
 /**
- * Created by NicholasCook on 10/14/17.
+ * Created on 10/14/17.
  */
 class LoginPresenter(private var loginView: ILoginContract.View?) : ILoginContract.Presenter {
 

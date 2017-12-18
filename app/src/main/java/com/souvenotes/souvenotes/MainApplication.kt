@@ -7,7 +7,7 @@ import com.google.firebase.database.FirebaseDatabase
 import net.danlew.android.joda.JodaTimeAndroid
 
 /**
- * Created by NicholasCook on 10/26/17.
+ * Created on 10/26/17.
  */
 class MainApplication : Application() {
 

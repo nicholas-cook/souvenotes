@@ -14,7 +14,7 @@ import com.souvenotes.souvenotes.utils.DateTimeUtils
 import kotlinx.android.synthetic.main.notes_list_item.view.*
 
 /**
- * Created by NicholasCook on 10/15/17.
+ * Created on 10/15/17.
  */
 class NotesListAdapter(private val activity: NotesListActivity,
                        options: FirebaseRecyclerOptions<NoteListModel>) :

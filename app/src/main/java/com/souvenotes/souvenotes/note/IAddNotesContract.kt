@@ -5,7 +5,7 @@ import com.souvenotes.souvenotes.models.NoteModel
 import com.souvenotes.souvenotes.utils.IBasePresenter
 
 /**
- * Created by NicholasCook on 10/23/17.
+ * Created on 10/23/17.
  */
 interface IAddNotesContract {
 

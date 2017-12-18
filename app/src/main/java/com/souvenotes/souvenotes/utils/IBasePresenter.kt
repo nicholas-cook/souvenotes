@@ -1,7 +1,7 @@
 package com.souvenotes.souvenotes.utils
 
 /**
- * Created by NicholasCook on 10/10/17.
+ * Created on 10/10/17.
  */
 interface IBasePresenter {
 
