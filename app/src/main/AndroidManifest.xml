@@ -28,6 +28,8 @@
             android:windowSoftInputMode="adjustPan|stateVisible" />
         <activity android:name=".login.forgotpassword.ForgotPasswordActivity" />
         <activity android:name=".settings.SettingsActivity" />
+        <activity android:name=".registration.policies.PrivacyPolicyActivity" />
+        <activity android:name=".registration.policies.TermsAndConditionsActivity" />
     </application>
 
 </manifest>

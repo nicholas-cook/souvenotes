@@ -9,6 +9,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.souvenotes.souvenotes.R
 import com.souvenotes.souvenotes.list.NotesListActivity
 import com.souvenotes.souvenotes.models.RegistrationModel
+import com.souvenotes.souvenotes.registration.policies.PrivacyPolicyActivity
+import com.souvenotes.souvenotes.registration.policies.TermsAndConditionsActivity
 import com.souvenotes.souvenotes.utils.SimpleTextWatcher
 import com.souvenotes.souvenotes.utils.hideKeyboard
 import kotlinx.android.synthetic.main.activity_registration.*
@@ -56,6 +58,13 @@ class RegistrationActivity : AppCompatActivity(), IRegistrationContract.View {
             }
         })
         password_confirmation.setText(model.passwordConfirmation)
+
+        terms_and_conditions.setOnClickListener {
+            startActivity(Intent(this, TermsAndConditionsActivity::class.java))
+        }
+        privacy_policy.setOnClickListener {
+            startActivity(Intent(this, PrivacyPolicyActivity::class.java))
+        }
     }
 
     override fun onStart() {
@@ -106,12 +115,12 @@ class RegistrationActivity : AppCompatActivity(), IRegistrationContract.View {
     override fun registerUser(email: String, password: String) {
         hideKeyboard(registration_parent)
         firebaseAuth?.createUserWithEmailAndPassword(email, password)?.addOnCompleteListener(
-                this) { result ->
+            this) { result ->
             if (result.isSuccessful) {
                 loadNotesListActivity()
             } else {
                 Snackbar.make(registration_parent, R.string.registration_error,
-                        Snackbar.LENGTH_LONG).show()
+                    Snackbar.LENGTH_LONG).show()
             }
         }
     }

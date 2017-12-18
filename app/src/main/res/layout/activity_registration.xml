@@ -20,6 +20,11 @@
         android:hint="@string/hint_password"
         android:inputType="textPassword" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/password_criteria" />
+
     <EditText
         android:id="@+id/password_confirmation"
         android:layout_width="match_parent"
@@ -27,10 +32,43 @@
         android:hint="@string/confirm_password"
         android:inputType="textPassword" />
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/password_criteria" />
+        android:layout_marginBottom="@dimen/default_margin"
+        android:layout_marginTop="@dimen/default_margin"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/policy_agreement" />
+
+        <TextView
+            android:id="@+id/terms_and_conditions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/terms_and_conditions"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/and" />
+
+        <TextView
+            android:id="@+id/privacy_policy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/privacy_policy"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/button_registration"

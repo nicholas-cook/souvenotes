@@ -4,5 +4,7 @@
         <item>@string/change_email</item>
         <item>@string/change_password</item>
         <item>@string/delete_account</item>
+        <item>@string/terms_and_conditions</item>
+        <item>@string/privacy_policy</item>
     </string-array>
 </resources>

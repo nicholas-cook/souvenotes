@@ -90,4 +90,15 @@
     <string name="delete_message">Deleting your account will permanently delete all of your data. You will not be able to restore it.</string>
     <string name="confirm_delete">Are you sure you want to permanently delete your account and all of your data?</string>
 
+    <!-- Policies -->
+    <string name="title_privacy_policy">Souvenotes Privacy Policy</string>
+    <string name="title_terms_and_conditions">Souvenotes Terms and Conditions</string>
+    <string name="title_error">Error</string>
+    <string name="error_privacy">Unable to load privacy policy. Please email\nsouvenotes.app+support@gmail.com\nto report this issue and receive a copy of the privacy policy.</string>
+    <string name="error_terms">Unable to load terms and conditions. Please email\nsouvenotes.app+support@gmail.com\nto report this issue and receive a copy of the terms and conditions.</string>
+    <string name="policy_agreement">By signing up you agree to our</string>
+    <string name="privacy_policy"><u>Privacy Policy</u></string>
+    <string name="terms_and_conditions"><u>Terms and Conditions</u></string>
+    <string name="and">and</string>
+
 </resources>

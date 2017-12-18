@@ -1,6 +1,7 @@
 package com.souvenotes.souvenotes.settings
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
@@ -11,6 +12,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.souvenotes.souvenotes.R
+import com.souvenotes.souvenotes.registration.policies.PrivacyPolicyActivity
+import com.souvenotes.souvenotes.registration.policies.TermsAndConditionsActivity
 import kotlinx.android.synthetic.main.fragment_settings.*
 import kotlinx.android.synthetic.main.settings_item.view.*
 
@@ -26,8 +29,9 @@ class SettingsFragment : Fragment() {
     private var settingsListener: SettingsListener? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?): View? = inflater.inflate(R.layout.fragment_settings,
-            container, false)
+                              savedInstanceState: Bundle?): View? = inflater.inflate(
+        R.layout.fragment_settings,
+        container, false)
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -37,7 +41,7 @@ class SettingsFragment : Fragment() {
         val settingsOptions = resources.getStringArray(R.array.settings_options)
 
         settings_recycler_view.addItemDecoration(
-                DividerItemDecoration(activity, LinearLayout.VERTICAL))
+            DividerItemDecoration(activity, LinearLayout.VERTICAL))
         settings_recycler_view.adapter = SettingsAdapter(settingsOptions)
     }
 
@@ -47,15 +51,15 @@ class SettingsFragment : Fragment() {
             settingsListener = context
         } else {
             throw RuntimeException(
-                    "Parent activity must implement SettingsFragment.SettingsListener")
+                "Parent activity must implement SettingsFragment.SettingsListener")
         }
     }
 
     inner class SettingsAdapter(private val settingsOptions: Array<String>) :
-            RecyclerView.Adapter<SettingsViewHolder>() {
+        RecyclerView.Adapter<SettingsViewHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SettingsViewHolder {
             val view = LayoutInflater.from(parent.context).inflate(R.layout.settings_item, parent,
-                    false)
+                false)
             return SettingsViewHolder(view)
         }
 
@@ -64,7 +68,19 @@ class SettingsFragment : Fragment() {
         override fun onBindViewHolder(holder: SettingsViewHolder, position: Int) {
             holder.itemView.settings_title.text = settingsOptions[position]
             holder.itemView.setOnClickListener {
-                settingsListener?.loadReauthFragment(SettingsType.values()[holder.adapterPosition])
+                when (holder.adapterPosition) {
+                    0, 1, 2 -> {
+                        settingsListener?.loadReauthFragment(
+                            SettingsType.values()[holder.adapterPosition])
+                    }
+                    3 -> {
+                        activity.startActivity(
+                            Intent(activity, TermsAndConditionsActivity::class.java))
+                    }
+                    4 -> {
+                        activity.startActivity(Intent(activity, PrivacyPolicyActivity::class.java))
+                    }
+                }
             }
         }
 
