@@ -35,7 +35,7 @@
     <string name="title_reset_password">Reset Password</string>
     <string name="reset_password_error">Unable to reset password</string>
     <string name="action_reset">Reset</string>
-    <string name="reset_email_sent">Password reset email sent</string>
+    <string name="reset_email_sent">Password reset email sent. It may take several minutes to arrive.</string>
 
     <!-- Notes List -->
     <string name="title_notes">Notes</string>
