@@ -16,9 +16,12 @@ class AddNotePresenter(private var addNoteView: IAddNotesContract.View?,
 
     private var existingNotesRef: DatabaseReference? = null
     private var valueEventListener: ValueEventListener? = null
+    private var existingListRef: DatabaseReference? = null
+    private var singleEventListener: ValueEventListener? = null
     private val userId = FirebaseAuth.getInstance().currentUser?.uid
 
     private var existingNote = NoteModel()
+    private var existingCreatedAt: Long = System.currentTimeMillis()
 
     override fun start() {
         if (userId == null) {
@@ -43,11 +46,34 @@ class AddNotePresenter(private var addNoteView: IAddNotesContract.View?,
                 }
             }
             existingNotesRef?.addValueEventListener(valueEventListener)
+
+            existingListRef = FirebaseDatabase.getInstance().reference.child("notes-list").child(
+                userId).child(it)
+            singleEventListener = object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val noteListModel = snapshot.getValue(NoteListModel::class.java)
+                    if (noteListModel != null) {
+                        existingCreatedAt = noteListModel.createdAt
+                    } else {
+                        addNoteView?.onLoadNoteError()
+                    }
+                }
+
+                override fun onCancelled(p0: DatabaseError?) {
+                    addNoteView?.onLoadNoteError()
+                }
+            }
+            existingListRef?.addListenerForSingleValueEvent(singleEventListener)
         }
     }
 
     override fun stop() {
-        existingNotesRef?.removeEventListener(valueEventListener)
+        valueEventListener?.let {
+            existingNotesRef?.removeEventListener(it)
+        }
+        singleEventListener?.let {
+            existingListRef?.removeEventListener(it)
+        }
         addNoteView = null
     }
 
@@ -55,7 +81,8 @@ class AddNotePresenter(private var addNoteView: IAddNotesContract.View?,
         if ((existingNote.title != title || existingNote.content != content)) {
             val notesValues = NoteModel(title, content).toMap()
             val timestamp = System.currentTimeMillis()
-            val noteListValues = NoteListModel(title, -1 * timestamp).toMap()
+            val createdAt = if (notesKey != null) existingCreatedAt else timestamp
+            val noteListValues = NoteListModel(title, -1 * timestamp, createdAt).toMap()
             val childUpdates = HashMap<String, Any>()
 
             val key = notesKey ?: FirebaseDatabase.getInstance().reference.child("notes").push().key

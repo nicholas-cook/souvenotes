@@ -76,13 +76,15 @@ data class NoteModel(var title: String = "", var content: String = "") : Parcela
 }
 
 data class NoteListModel(val title: String = "",
-                         val timestamp: Long = -1 * System.currentTimeMillis()) {
+                         val timestamp: Long = -1 * System.currentTimeMillis(),
+                         val createdAt: Long = System.currentTimeMillis()) {
 
     @Exclude
     fun toMap(): Map<String, Any> {
         return HashMap<String, Any>().apply {
             put("title", title)
             put("timestamp", timestamp)
+            put("createdAt", createdAt)
         }
     }
 }
