@@ -1,5 +1,6 @@
 package com.souvenotes.souvenotes.settings.password
 
+import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
@@ -28,7 +29,7 @@ class ChangePasswordFragment : Fragment(), IChangePasswordContract.View {
         return inflater.inflate(R.layout.fragment_change_password, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         change_password.addTextChangedListener(object : SimpleTextWatcher() {
@@ -82,7 +83,7 @@ class ChangePasswordFragment : Fragment(), IChangePasswordContract.View {
 
     override fun onPasswordChanged() {
         Toast.makeText(activity, R.string.change_password_success, Toast.LENGTH_LONG).show()
-        activity.finish()
+        activity?.finish()
     }
 
     override fun onPasswordChangeFailed(message: Int) {
@@ -91,7 +92,7 @@ class ChangePasswordFragment : Fragment(), IChangePasswordContract.View {
 
     override fun logout() {
         Toast.makeText(activity, R.string.log_back_in, Toast.LENGTH_LONG).show()
-        LoginActivity.logout(activity)
+        LoginActivity.logout(activity as Context)
     }
 
     companion object {

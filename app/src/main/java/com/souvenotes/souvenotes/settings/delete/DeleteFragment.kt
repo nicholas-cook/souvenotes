@@ -1,5 +1,6 @@
 package com.souvenotes.souvenotes.settings.delete
 
+import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
@@ -24,7 +25,7 @@ class DeleteFragment : Fragment(), IDeleteContract.View {
         return inflater.inflate(R.layout.fragment_delete, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         button_delete.setOnClickListener {
@@ -33,7 +34,7 @@ class DeleteFragment : Fragment(), IDeleteContract.View {
     }
 
     private fun showDeleteConfirmation() {
-        val builder = AlertDialog.Builder(activity).apply {
+        val builder = AlertDialog.Builder(activity as Context).apply {
             setMessage(R.string.confirm_delete)
             setPositiveButton(R.string.option_delete, { dialog, _ ->
                 dialog.dismiss()
@@ -61,7 +62,7 @@ class DeleteFragment : Fragment(), IDeleteContract.View {
     }
 
     override fun onAccountDeleted() {
-        LoginActivity.logout(activity)
+        LoginActivity.logout(activity as Context)
     }
 
     override fun onDeletionError(message: Int) {
@@ -70,7 +71,7 @@ class DeleteFragment : Fragment(), IDeleteContract.View {
 
     override fun logout() {
         Toast.makeText(activity, R.string.log_back_in, Toast.LENGTH_LONG).show()
-        LoginActivity.logout(activity)
+        LoginActivity.logout(activity as Context)
     }
 
     companion object {

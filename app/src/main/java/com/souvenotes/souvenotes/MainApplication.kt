@@ -1,6 +1,6 @@
 package com.souvenotes.souvenotes
 
-import android.app.Application
+import android.support.multidex.MultiDexApplication
 import com.google.android.gms.ads.MobileAds
 import com.google.firebase.FirebaseApp
 import com.google.firebase.database.FirebaseDatabase
@@ -9,7 +9,7 @@ import net.danlew.android.joda.JodaTimeAndroid
 /**
  * Created on 10/26/17.
  */
-class MainApplication : Application() {
+class MainApplication : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()

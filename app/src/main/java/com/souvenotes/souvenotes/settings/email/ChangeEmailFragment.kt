@@ -1,5 +1,6 @@
 package com.souvenotes.souvenotes.settings.email
 
+import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
@@ -29,7 +30,7 @@ class ChangeEmailFragment : Fragment(), IChangeEmailContract.View {
         return inflater.inflate(R.layout.fragment_change_email, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         change_email.addTextChangedListener(object : SimpleTextWatcher() {
@@ -83,7 +84,7 @@ class ChangeEmailFragment : Fragment(), IChangeEmailContract.View {
 
     override fun onEmailChanged() {
         Toast.makeText(activity, R.string.email_change_success, Toast.LENGTH_LONG).show()
-        activity.finish()
+        activity?.finish()
     }
 
     override fun onEmailChangeFailed(message: Int) {
@@ -92,7 +93,7 @@ class ChangeEmailFragment : Fragment(), IChangeEmailContract.View {
 
     override fun logout() {
         Toast.makeText(activity, R.string.log_back_in, Toast.LENGTH_LONG).show()
-        LoginActivity.logout(activity)
+        LoginActivity.logout(activity as Context)
     }
 
     companion object {

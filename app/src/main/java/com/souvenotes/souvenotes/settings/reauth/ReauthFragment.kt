@@ -41,7 +41,7 @@ class ReauthFragment : Fragment(), IReauthContract.View {
 
         password = savedInstanceState?.getString(EXTRA_PASSWORD) ?: ""
         settingsType = savedInstanceState?.getSerializable(
-            EXTRA_SETTINGS_TYPE) as SettingsFragment.SettingsType? ?: arguments.getSerializable(
+            EXTRA_SETTINGS_TYPE) as SettingsFragment.SettingsType? ?: arguments?.getSerializable(
             EXTRA_SETTINGS_TYPE) as SettingsFragment.SettingsType?
 
         when (settingsType) {
@@ -68,7 +68,7 @@ class ReauthFragment : Fragment(), IReauthContract.View {
         }
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         reauth_password.addTextChangedListener(object : SimpleTextWatcher() {
@@ -135,7 +135,7 @@ class ReauthFragment : Fragment(), IReauthContract.View {
 
     override fun logout() {
         Toast.makeText(activity, R.string.log_back_in, Toast.LENGTH_LONG).show()
-        LoginActivity.logout(activity)
+        LoginActivity.logout(activity as Context)
     }
 
     companion object {

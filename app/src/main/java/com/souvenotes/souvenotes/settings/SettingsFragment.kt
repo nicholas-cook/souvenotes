@@ -33,7 +33,7 @@ class SettingsFragment : Fragment() {
         R.layout.fragment_settings,
         container, false)
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.title_settings)
@@ -74,11 +74,11 @@ class SettingsFragment : Fragment() {
                             SettingsType.values()[holder.adapterPosition])
                     }
                     3 -> {
-                        activity.startActivity(
+                        activity?.startActivity(
                             Intent(activity, TermsAndConditionsActivity::class.java))
                     }
                     4 -> {
-                        activity.startActivity(Intent(activity, PrivacyPolicyActivity::class.java))
+                        activity?.startActivity(Intent(activity, PrivacyPolicyActivity::class.java))
                     }
                 }
             }
