@@ -13,7 +13,6 @@ import android.view.View
 import android.widget.Toast
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
-import com.souvenotes.souvenotes.BuildConfig
 import com.souvenotes.souvenotes.R
 import com.souvenotes.souvenotes.login.LoginActivity
 import com.souvenotes.souvenotes.models.NoteModel
@@ -51,18 +50,6 @@ class AddNoteActivity : AppCompatActivity(), IAddNotesContract.View {
                 noteModel.content = s.toString()
             }
         })
-        if (BuildConfig.DEBUG) {
-            ad_view.adListener = object : AdListener() {
-                override fun onAdLoaded() {
-                    ad_view.visibility = View.VISIBLE
-                }
-
-                override fun onAdFailedToLoad(errorCode: Int) {
-                    ad_view.visibility = View.GONE
-                }
-            }
-            ad_view.loadAd(AdRequest.Builder().build())
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -137,6 +124,16 @@ class AddNoteActivity : AppCompatActivity(), IAddNotesContract.View {
         super.onStart()
         addNotePresenter = AddNotePresenter(this, noteKey)
         addNotePresenter?.start()
+        ad_view.adListener = object : AdListener() {
+            override fun onAdLoaded() {
+                ad_view.visibility = View.VISIBLE
+            }
+
+            override fun onAdFailedToLoad(errorCode: Int) {
+                ad_view.visibility = View.GONE
+            }
+        }
+        ad_view.loadAd(AdRequest.Builder().build())
     }
 
     override fun onStop() {
