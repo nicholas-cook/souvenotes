@@ -7,6 +7,8 @@
 <p>Along the same lines, Souvenotes cannot always take responsibility for the way you use the application i.e. You need to make sure that your device stays charged – if it runs out of battery and you cannot turn it on to use the Service, Souvenotes cannot accept responsibility.</p>
 <p>With respect to the responsibility of Souvenotes for your use of the application, when you are using the application, it is important to bear in mind that although we endeavor to ensure that it is updated and correct at all times, we do rely on third parties to provide information to us so that we can make it available to you. Souvenotes accepts no liability for any loss, direct or indirect, you experience as a result of relying wholly on this functionality of the application.</p>
 <p>At some point, we may wish to update the application. The application is currently available on Android – the requirements for this system (and for any additional systems we decide to extend the availability of the application to) may change, and you will need to download the updates if you want to keep using the application. Souvenotes does not promise that it will always update the application so that it is relevant to you and/or works with the Android version that you have installed on your device. However, you promise to always accept updates to the application when offered to you. We may also wish to stop providing the application, and may terminate use of it at any time without giving notice of termination to you. Unless we tell you otherwise, upon any termination, (a) the rights and licenses granted to you in these terms will end; (b) you must stop using the application, and (if needed) delete it from your device.</p>
+<p><strong>Account Recovery</strong></p>
+<p>The email address you use to register for the application (or the email address you associate with the application after initial registration) is used to help you recover your Souvenotes account if you forget your password. If you never had access, or lose access, to this email account, your Souvenotes account recovery cannot be guaranteed.</p>
 <p><strong>Children under The Age of 13 </strong></p>
 <p>Children under the age of 13 are not permitted to use the application or provide any data to us.</p>
 <p><strong>Changes to These Terms and Conditions</strong></p>
@@ -14,5 +16,5 @@
 </p>
 <p><strong>Contact Us</strong></p>
 <p>If you have any questions about our Terms and Conditions, do not hesitate to contact us at souvenotes.app+support@gmail.com.</p>
-<p>Last updated December 16, 2017</p>
+<p>Last updated December 27, 2017</p>
 </body></html>
