@@ -50,6 +50,16 @@ class AddNoteActivity : AppCompatActivity(), IAddNotesContract.View {
                 noteModel.content = s.toString()
             }
         })
+        ad_view.adListener = object : AdListener() {
+            override fun onAdLoaded() {
+                ad_view.visibility = View.VISIBLE
+            }
+
+            override fun onAdFailedToLoad(errorCode: Int) {
+                ad_view.visibility = View.GONE
+            }
+        }
+        ad_view.loadAd(AdRequest.Builder().build())
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -91,8 +101,9 @@ class AddNoteActivity : AppCompatActivity(), IAddNotesContract.View {
     }
 
     override fun onNoteLoaded(note: NoteModel) {
-        //Use append to move cursor to end of text
-        note_title.append(note.title)
+        note_title.setText(note.title)
+        //Move cursor to end of text
+        note_title.setSelection(note_title.text?.length ?: 0)
         note_content.setText(note.content)
     }
 
@@ -124,16 +135,6 @@ class AddNoteActivity : AppCompatActivity(), IAddNotesContract.View {
         super.onStart()
         addNotePresenter = AddNotePresenter(this, noteKey)
         addNotePresenter?.start()
-        ad_view.adListener = object : AdListener() {
-            override fun onAdLoaded() {
-                ad_view.visibility = View.VISIBLE
-            }
-
-            override fun onAdFailedToLoad(errorCode: Int) {
-                ad_view.visibility = View.GONE
-            }
-        }
-        ad_view.loadAd(AdRequest.Builder().build())
     }
 
     override fun onStop() {

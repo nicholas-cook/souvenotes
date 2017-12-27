@@ -50,6 +50,16 @@ class NotesListActivity : AppCompatActivity(), IListContract.View {
         add_note.setOnClickListener {
             startActivity(Intent(this, AddNoteActivity::class.java))
         }
+        ad_view.adListener = object : AdListener() {
+            override fun onAdLoaded() {
+                ad_view.visibility = View.VISIBLE
+            }
+
+            override fun onAdFailedToLoad(errorCode: Int) {
+                ad_view.visibility = View.GONE
+            }
+        }
+        ad_view.loadAd(AdRequest.Builder().build())
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -89,16 +99,6 @@ class NotesListActivity : AppCompatActivity(), IListContract.View {
         super.onStart()
         listPresenter = NotesListPresenter(this)
         notesAdapter?.startListening()
-        ad_view.adListener = object : AdListener() {
-            override fun onAdLoaded() {
-                ad_view.visibility = View.VISIBLE
-            }
-
-            override fun onAdFailedToLoad(errorCode: Int) {
-                ad_view.visibility = View.GONE
-            }
-        }
-        ad_view.loadAd(AdRequest.Builder().build())
     }
 
     override fun onStop() {
