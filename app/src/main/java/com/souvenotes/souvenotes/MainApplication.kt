@@ -15,7 +15,7 @@ class MainApplication : MultiDexApplication() {
         super.onCreate()
         FirebaseApp.initializeApp(this)
         FirebaseDatabase.getInstance().setPersistenceEnabled(true)
-        MobileAds.initialize(this, "ca-app-pub-3940256099942544/6300978111")
+        MobileAds.initialize(this, "ca-app-pub-5268862472871083~6197425733")
         JodaTimeAndroid.init(this)
     }
 }

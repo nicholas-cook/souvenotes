@@ -77,7 +77,7 @@ class AddNotePresenter(private var addNoteView: IAddNotesContract.View?,
         addNoteView = null
     }
 
-    override fun saveNote(title: String, content: String) {
+    override fun saveNote(title: String, content: String): String? {
         if ((existingNote.title != title || existingNote.content != content)) {
             val notesValues = NoteModel(title, content).toMap()
             val timestamp = System.currentTimeMillis()
@@ -86,8 +86,8 @@ class AddNotePresenter(private var addNoteView: IAddNotesContract.View?,
             val childUpdates = HashMap<String, Any>()
 
             val key = notesKey ?: FirebaseDatabase.getInstance().reference.child("notes").push().key
-            childUpdates.put("/notes/$userId/$key", notesValues)
-            childUpdates.put("/notes-list/$userId/$key", noteListValues)
+            childUpdates["/notes/$userId/$key"] = notesValues
+            childUpdates["/notes-list/$userId/$key"] = noteListValues
 
             FirebaseDatabase.getInstance().reference.updateChildren(
                 childUpdates).addOnFailureListener { exception ->
@@ -98,14 +98,16 @@ class AddNotePresenter(private var addNoteView: IAddNotesContract.View?,
                     addNoteView?.onAddNoteError(R.string.update_note_error)
                 }
             }
+            return key
         }
+        return notesKey
     }
 
     override fun deleteNote() {
         notesKey?.let {
             val childUpdates = HashMap<String, Any?>()
-            childUpdates.put("/notes/$userId/$it", null)
-            childUpdates.put("/notes-list/$userId/$it", null)
+            childUpdates["/notes/$userId/$it"] = null
+            childUpdates["/notes-list/$userId/$it"] = null
             //Prevent triggering error for successful delete
             FirebaseDatabase.getInstance().reference.updateChildren(childUpdates)
             existingNotesRef?.addListenerForSingleValueEvent(object : ValueEventListener {

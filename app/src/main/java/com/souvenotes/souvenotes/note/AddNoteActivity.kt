@@ -139,7 +139,8 @@ class AddNoteActivity : AppCompatActivity(), IAddNotesContract.View {
 
     override fun onStop() {
         if (!isDeleting) {
-            addNotePresenter?.saveNote(note_title.text.toString(), note_content.text.toString())
+            noteKey = addNotePresenter?.saveNote(note_title.text.toString(),
+                note_content.text.toString())
         }
         addNotePresenter?.stop()
         super.onStop()

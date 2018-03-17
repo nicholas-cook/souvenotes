@@ -24,7 +24,7 @@ interface IAddNotesContract {
     }
 
     interface Presenter : IBasePresenter {
-        fun saveNote(title: String, content: String)
+        fun saveNote(title: String, content: String): String?
 
         fun deleteNote()
     }
