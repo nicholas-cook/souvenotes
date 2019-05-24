@@ -8,14 +8,15 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.souvenotes.souvenotes.R
 import kotlinx.android.synthetic.main.activity_terms_of_service.*
-import kotlinx.coroutines.Job
 
 /**
  * Created on 12/17/17.
  */
 class TermsAndConditionsActivity : AppCompatActivity() {
 
-    private var parseJob: Job? = null
+    companion object {
+        private const val FILE_NAME = "souvenotes_terms_of_service.txt"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +25,7 @@ class TermsAndConditionsActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setTitle(R.string.title_terms_and_conditions)
 
-        val viewModel = ViewModelProviders.of(this).get(TermsAndConditionsViewModel::class.java)
+        val viewModel = ViewModelProviders.of(this).get(PoliciesViewModel::class.java)
 
         viewModel.progressVisible.observe(this, Observer {
             it?.let { visible ->
@@ -46,7 +47,7 @@ class TermsAndConditionsActivity : AppCompatActivity() {
             }
         })
 
-        viewModel.loadText(assets)
+        viewModel.loadText(assets, FILE_NAME)
     }
 
     override fun onSupportNavigateUp(): Boolean {

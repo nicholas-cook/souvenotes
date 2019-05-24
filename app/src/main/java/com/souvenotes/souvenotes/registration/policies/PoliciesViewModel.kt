@@ -14,10 +14,10 @@ import kotlinx.coroutines.launch
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
-class TermsAndConditionsViewModel : ViewModel() {
+class PoliciesViewModel : ViewModel() {
 
     companion object {
-        private val LOG_TAG = TermsAndConditionsViewModel::class.java.simpleName
+        private val LOG_TAG = PoliciesViewModel::class.java.simpleName
     }
 
     private val ioScope = CoroutineScope(Dispatchers.IO)
@@ -32,10 +32,10 @@ class TermsAndConditionsViewModel : ViewModel() {
         showError.value = false
     }
 
-    fun loadText(assets: AssetManager) {
+    fun loadText(assets: AssetManager, fileName: String) {
         ioScope.launch {
             try {
-                val policyString = getPrivacyText(assets)
+                val policyString = getPrivacyText(assets, fileName)
                 policyText.postValue(getHtml(policyString))
             } catch (e: Exception) {
                 Log.e(LOG_TAG, "Error parsing privacy policy: ${e.message}")
@@ -46,9 +46,9 @@ class TermsAndConditionsViewModel : ViewModel() {
         }
     }
 
-    private fun getPrivacyText(assets: AssetManager): String {
+    private fun getPrivacyText(assets: AssetManager, fileName: String): String {
         val policyBuilder = StringBuilder()
-        val inputStream = assets.open("souvenotes_terms_of_service.txt")
+        val inputStream = assets.open(fileName)
         val inputStreamReader = InputStreamReader(inputStream)
         val bufferedReader = BufferedReader(inputStreamReader)
         var nextLine = bufferedReader.readLine()

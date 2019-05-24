@@ -14,6 +14,10 @@ import kotlinx.android.synthetic.main.activity_privacy_policy.*
  */
 class PrivacyPolicyActivity : AppCompatActivity() {
 
+    companion object {
+        private const val FILE_NAME = "souvenotes_privacy_policy.txt"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_privacy_policy)
@@ -21,7 +25,7 @@ class PrivacyPolicyActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setTitle(R.string.title_privacy_policy)
 
-        val viewModel = ViewModelProviders.of(this).get(PrivacyPolicyViewModel::class.java)
+        val viewModel = ViewModelProviders.of(this).get(PoliciesViewModel::class.java)
 
         viewModel.progressVisible.observe(this, Observer {
             it?.let { visible ->
@@ -43,7 +47,7 @@ class PrivacyPolicyActivity : AppCompatActivity() {
             }
         })
 
-        viewModel.loadText(assets)
+        viewModel.loadText(assets, FILE_NAME)
     }
 
     override fun onSupportNavigateUp(): Boolean {
